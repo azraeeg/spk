@@ -1,0 +1,132 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="col-md-12">
+    <div class="card card-info">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <div class="row p-3 mb-2">
+                <div class="col-md-12 text-center">
+                    <h3><strong>BPR NUSAMBA CEPIRING</strong></h3>
+                    <p>51497</p>
+                    <hr style="margin: auto; border: 1px solid black;">
+                    <h4><strong>SURAT PENGANTAR NOTARIS</strong></h4>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <p><strong>Kepada</strong></p>
+                    <p>Yth. Notaris</p>
+                    <p>di kota KENDAL</p>
+
+                    <p>Dengan hormat,</p>
+                    <p>Bersama ini kami hadapkan nasabah:</p>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 5px;"><strong>Nama</strong></td>
+                            <td style="padding: 5px;">AGUS SETIAWAN</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Alamat</strong></td>
+                            <td style="padding: 5px;">SEMBUNG 13/02, CEPIRING, KENDAL</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Keperluan</strong></td>
+                            <td style="padding: 5px;">APHT</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <p>berkenaan dengan Pinjaman di BPR NUSAMBA CEPIRING.</p>
+                    <p>Tertanggal hari ini dengan penjelasan sebagai berikut:</p>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 5px;"><strong>Pokok</strong></td>
+                            <td style="padding: 5px;">Rp. 100,000,000</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Bunga</strong></td>
+                            <td style="padding: 5px;">11.4 %</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Administrasi</strong></td>
+                            <td style="padding: 5px;">Rp. 300,000</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Provisi</strong></td>
+                            <td style="padding: 5px;">2 %</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Jangka Waktu</strong></td>
+                            <td style="padding: 5px;">60 bulan</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;"><strong>Jenis Kredit</strong></td>
+                            <td style="padding: 5px;">KREDIT INSTALMENT Modal Kerja</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <p><strong>Barang jaminan berupa:</strong></p>
+                    <ul>
+                        <li>Sebidang Tanah DAN BANGUNAN, terletak di GONDANG 001/005 CEPIRING KENDAL, luas tanah (m2) 425, SHM / HGB / NIB No.00886, atas nama AGUS SETIAWAN, Jaminan milik SENDIRI, NILAI WAJAR Rp. 300,000,000.</li>
+                        <li>Kendaraan roda 2, Merk/Tahun: HONDA / 2024, Type: SPM, BPKB Nomor: J-989898989898, Nomor Polisi: H-1234-GL, Atas Nama: AGUS SETIAWAN, Jaminan Milik: SENDIRI, NILAI HT Rp. 25,000,000.</li>
+                        <li>Kendaraan roda 4, Merk/Tahun: Toyota / Yaris, Type: MPNP, BPKB Nomor: G-99898989, Nomor Polisi: H-5645-HB, Atas Nama: AGUS SETIAWAN, Jaminan Milik: SENDIRI, TAKSASI Rp. 100,000,000.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row p-3 mb-2">
+                <div class="col-md-12">
+                    <p>Atas kerjasamanya yang baik kami ucapkan terima kasih.</p>
+                </div>
+            </div>
+
+            <div class="row p-3">
+                <div class="col-md-6 text-left">
+                    <p><strong>Mengetahui</strong></p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p>Kendal, 26 Maret 2025</p>
+                </div>
+            </div>
+
+            <div class="row p-3">
+                <div class="col-md-12">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr>
+                            <td style="text-align: center; font-weight: bold;">ANDIN SYAMSUL RIZAL, ST</td>
+                            <td style="text-align: center; font-weight: bold;">FETO</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">KKPO</td>
+                            <td style="text-align: center;">Adm Kredit</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@endsection
