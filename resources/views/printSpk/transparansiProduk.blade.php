@@ -31,7 +31,7 @@
                         <div class="col-md-12">
                             <p><strong>Kepada Yth.</strong></p>
                             <p>Bp./ Ibu <strong>{{$namaDebitur}}</strong></p>
-                            <p>Di <strong>SEMBUNG 13/02, CEPIRING, KENDAL</strong></p>
+                            <p>Di <strong>{{$alamatDeb}}</strong></p>
                             <h5><strong>Perihal: Informasi Tentang Produk Kredit</strong></h5>
                         </div>
                     </div>
@@ -46,12 +46,18 @@
 
                     
                         <div class="col-md-12">
-                        <p><strong>1.</strong> Jenis Kredit : Instalment Modal Kerja</p>
+                        <p><strong>1.</strong> Jenis Kredit : {{$fasilitasKred}}</p>
                         </div>
                     
                     
                         <div class="col-md-12">
-                        <p><strong>2.</strong> Sifat Kredit : Instalment</p>
+                            <p><strong>2.</strong> Sifat Kredit : 
+                                @if(stripos($fasilitasKred, 'instalment') !== false)
+                                    Instalment
+                                @else
+                                    Reguler
+                                @endif
+                            </p>
                         </div>
                     
                         <div class="col-md-12">
@@ -59,18 +65,38 @@
                         Fotokopi Kartu Keluarga & Surat Nikah, Fotokopi Jaminan</p>
                         </div>
                    
+                        @php
+                            $dataJangkaWaktu = [
+                                1 => 0.0458,
+                                3 => 0.1375,
+                                6 => 0.275,
+                                12 => 0.55,
+                                18 => 0.825,
+                                24 => 1.1,
+                                30 => 1.375,
+                                36 => 1.65,
+                                48 => 2.2,
+                                60 => 2.75
+                            ];
+                        @endphp
+
                         <div class="col-md-12">
                             <p><strong>4.</strong> Biaya-biaya:</p>
                             <ul style="list-style-type: lower-alpha; padding-left: 50px;">
-                                <li>Provisi: 2.00% dari plafond</li>
-                                <li>Administrasi: Rp 300,000</li>
-                                <li>Asuransi: 2.75% dari plafond</li>
+                                <li>Provisi: {{$provisi}}% dari plafond</li>
+                                <li>Administrasi: Rp {{$adm}}</li>
+                                <li>Asuransi: 
+                                    @if(array_key_exists($jangkaWaktu, $dataJangkaWaktu))
+                                        {{$dataJangkaWaktu[$jangkaWaktu]}}% dari plafond
+                                    @else
+                                        - % dari plafond
+                                    @endif
+                                </li>
                                 <li>Pengikatan Kredit: SKMHT</li>
                                 <li>Pengikatan Jaminan: APHT</li>
                                 <li>Penalty: Total Tunggakan Angsuran x 0.95% per bulan</li>
                             </ul>
-                        </div>
-                    
+                        </div>                    
                         <div class="col-md-12">
                         <p><strong>5.</strong>Suku Bunga: 11.4%</p>
                             <ul style="list-style-type: lower-alpha; padding-left: 50px;">

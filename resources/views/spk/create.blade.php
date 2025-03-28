@@ -143,12 +143,12 @@
                             <label for="fasilitasKred">FASILITAS KREDIT :</label>
                             <select class="form-control" name="fasilitasKred" required>
                                 <option value=""></option>
-                                <option value="1">Ins modal kerja</option>
-                                <option value="2">Ins investasi</option>
-                                <option value="3">Ins Konsumsi</option>
-                                <option value="4">Reg modal kerja</option>
-                                <option value="5">Reg Investasi</option>
-                                <option value="6">Reg Konsumsi</option>
+                                <option value="Instalment modal kerja">Instalment modal kerja</option>
+                                <option value="Instalment investasi">Instalment investasi</option>
+                                <option value="Instalment Konsumsi">Instalment Konsumsi</option>
+                                <option value="Reguler modal kerja">Reguler modal kerja</option>
+                                <option value="Reguler Investasi">Reguler Investasi</option>
+                                <option value="Reguler Konsumsi">Reguler Konsumsi</option>
                             </select>
                         </div>
                         <div class="form-group">
