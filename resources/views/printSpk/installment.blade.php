@@ -669,35 +669,61 @@
                     </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-4">
-                        <h5><strong>PEMINJAM</strong></h5>
-                        <p>{{$namaDebitur}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5><strong>"DISETUJUI SUAMI/ISTRI"</strong></h5>
-                        <p>{{$namaIstri}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5><strong>PT BPR NUSAMBA CEPIRING</strong></h5>
-                        <p>{{$namaKacab}}</p>
-                    </div>
+                <div class="col-md-4">
+                    <p><strong>PEMINJAM</strong></p>
                 </div>
+                <div class="col-md-4">
+                    <p><strong>DISETUJUI SUAMI/ISTRI</strong></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>PT BPR NUSAMBA CEPIRING</strong></p>
+                </div>
+            </div>
 
-                <div class="col-md-12 text-center">
+            <div class="row text-center mt-4">
+                <div class="col-md-4">
+                    <hr style="width: 80%; border: 1px solid black; margin-bottom: 0;">
+                    <p>{{$namaDebitur}}</p>
+                </div>
+                <div class="col-md-4">
+                    <hr style="width: 80%; border: 1px solid black; margin-bottom: 0;">
+                    <p>{{$namaIstri}}</p>
+                </div>
+                <div class="col-md-4">
+                    <hr style="width: 80%; border: 1px solid black; margin-bottom: 0;">
+                    <p>{{$namaKacab}}</p>
+                </div>
+            </div>
+
+            <div class="row text-center mt-4">
+                <div class="col-md-12">
                     <h5><strong>PENJAMIN</strong></h5>
                 </div>
+            </div>
 
-                <div class="row text-center">
-                    <div class="col-md-6">
-                        <p>………………………….</p>
-                        <p>(Nama Jelas)</p>
-                    </div>
-                    <div class="col-md-6">
-                        <p>………………………….</p>
-                        <p>(Nama Jelas)</p>
-                    </div>
+            <div class="row text-center mt-3">
+                <div class="col-md-4">
+                    <p style="border-bottom: 1px dotted black; display: inline-block; width: 80%;">………………………….</p>
                 </div>
+                <div class="col-md-4">
+                    <p style="border-bottom: 1px dotted black; display: inline-block; width: 80%;">………………………….</p>
+                </div>
+                <div class="col-md-4">
+                    <p style="border-bottom: 1px dotted black; display: inline-block; width: 80%;">..........................................</p>
+                </div>
+            </div>
 
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <p>(nama jelas)</p>
+                </div>
+                <div class="col-md-4">
+                    <p>(nama jelas)</p>
+                </div>
+                <div class="col-md-4">
+                    <p>(nama jelas)</p>
+                </div>
+            </div>
                 <div class="col-md-12 text-center">
                     <p><em>“Perjanjian ini telah disesuaikan dengan ketentuan peraturan perundang-undangan termasuk ketentuan Peraturan Otoritas Jasa Keuangan.”</em></p>
                 </div>

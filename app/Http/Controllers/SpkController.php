@@ -435,7 +435,6 @@ class SpkController extends Controller
         $provisi = DB::table('form_spk')->where('noSpk', $noSpk)->value('provisi');
         $adm = DB::table('form_spk')->where('noSpk', $noSpk)->value('adm');
         $namaKacab = DB::table('form_spk')->where('noSpk', $noSpk)->value('namaKacab');
-        $kota = DB::table('mstr_kacab')->where('noSpk', $noSpk)->value('kota');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($provisi / 100) * $plafondKred;
