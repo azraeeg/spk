@@ -23,23 +23,23 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="padding: 5px;"><strong>Telah terima dari</strong></td>
-                        <td style="padding: 5px;">:</td>
+                        <td style="padding: 5px;"></td>
                         <td style="padding: 5px;"></td>
                     </tr>
                     <tr>
                         <td style="padding: 5px;"><strong>Nama</strong></td>
                         <td style="padding: 5px;">:</td>
-                        <td style="padding: 5px;"><strong>AGUS SETIAWAN</strong></td>
+                        <td style="padding: 5px;"><strong>{{$namaDebitur}}</strong></td>
                     </tr>
                     <tr>
                         <td style="padding: 5px;"><strong>Alamat</strong></td>
                         <td style="padding: 5px;">:</td>
-                        <td style="padding: 5px;">SEMBUNG 13/02, CEPIRING, KENDAL</td>
+                        <td style="padding: 5px;">{{$alamatDeb}}</td>
                     </tr>
                     <tr>
                         <td style="padding: 5px;"><strong>No Rekening</strong></td>
                         <td style="padding: 5px;">:</td>
-                        <td style="padding: 5px;">10.51497.1</td>
+                        <td style="padding: 5px;">{{$noRekKred}}</td>
                     </tr>
                 </table>
             </div>
@@ -51,6 +51,7 @@
             </div>
 
             <!-- Daftar Jaminan -->
+             <!-- di foreach dari db jaminan dgn parameter noSpk -->
             <div>
                 <ul>
                     <li>Sebidang Tanah DAN BANGUNAN, terletak di GONDANG 001/005 CEPIRING KENDAL, luas tanah (m²)
@@ -66,13 +67,13 @@
 
             <!-- Informasi Kredit -->
             <div class="mt-3">
-                <p>Barang tersebut di atas sebagai jaminan atas kredit sebesar Rp. 100,000,000, 
-                    dengan jangka waktu 60 bulan dan suku bunga 11.4%.</p>
+                <p>Barang tersebut di atas sebagai jaminan atas kredit sebesar Rp. {{ number_format($plafondKred, 0, ',', '.') }} 
+                    dengan jangka waktu {{$jangkaWaktu}} bulan dan suku bunga {{$bunga}}%.</p>
             </div>
 
             <!-- Tanggal -->
             <div class="mt-3">
-                <p>26 Maret 2025</p>
+                <p>{{$tglDroping}}</p>
             </div>
 
             <!-- Tanda Tangan -->
@@ -80,18 +81,20 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td style="text-align: center; font-weight: bold;">Yang Menyerahkan</td>
+                        <td style="text-align: center; font-weight: bold;"></td>
                         <td style="text-align: center; font-weight: bold;">Yang Menerima</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="height: 50px;"></td>
                     </tr>
                     <tr>
-                        <td style="text-align: center; font-weight: bold;">AGUS SETIAWAN</td>
-                        <td style="text-align: center; font-weight: bold;">LINDA SETYANTI</td>
+                        <td style="text-align: center; font-weight: bold;">{{$namaDebitur}}</td>
+                        <td style="text-align: center; font-weight: bold;">{{$namaIstri}}</td>
                         <td style="text-align: center; font-weight: bold;">ROSA WIDYA</td>
                     </tr>
                 </table>
             </div>
+            
 
             <!-- Arsip, Mengetahui, Memeriksa -->
             <div class="mt-4">
