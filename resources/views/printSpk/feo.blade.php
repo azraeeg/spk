@@ -20,24 +20,24 @@
                     <table class="table table-borderless">
                         <tr>
                             <td><strong>I</strong></td>
-                            <td><strong>ANDIN SYAMSUL RIZAL, ST</strong></td>
+                            <td><strong>{{$namaKacab}}</strong></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
-                                Dari dan karenanya bertindak untuk dan atas nama PT. Bank Perekonomian Rakyat Nusamba Cepiring berkedudukan di Kendal. <br>
+                                Dari dan karenanya bertindak untuk dan atas nama PT. Bank Perekonomian Rakyat Nusamba Cepiring berkedudukan di {{$kota}}. <br>
                                 Untuk selanjutnya disebut <strong>PIHAK KESATU / KREDITUR</strong>.
                             </td>
                         </tr>
                         <tr>
                             <td><strong>II</strong></td>
-                            <td><strong>AGUS SETIAWAN</strong></td>
+                            <td><strong>{{$namaDebitur}}</strong></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 Bertindak untuk dan atas nama diri sendiri / perorangan. <br>
-                                Bertempat tinggal di <strong>SEMBUNG 13/02, CEPIRING, KENDAL</strong>. <br>
+                                Bertempat tinggal di <strong>{{$alamatDeb}}</strong>. <br>
                                 Untuk selanjutnya disebut <strong>PIHAK KEDUA / DEBITUR</strong>.
                             </td>
                         </tr>
@@ -45,7 +45,9 @@
                 </div>
                 <div class="row p-3 mb-2">
                     <p>
-                        Menerangkan bahwa untuk lebih menjamin ketertiban pembayaran lunas seluruh kewajiban kepada PIHAK KESATU / KREDITUR berdasarkan surat akte Perjanjian Kredit, KREDITUR nomor: <strong>100/SPK/NC-PST/IV/2025</strong> tanggal <strong>27 Maret 2025</strong>, berikut segala perubahan / penambahannya di kemudian hari, maka PIHAK KEDUA / DEBITUR secara fiduciaire kepada PIHAK KESATU / KREDITUR atas barang-barang yang diuraikan dalam daftar terlampir.
+                        Menerangkan bahwa untuk lebih menjamin ketertiban pembayaran lunas seluruh kewajiban kepada 
+                        PIHAK KESATU / KREDITUR berdasarkan surat akte Perjanjian Kredit, KREDITUR nomor: 
+                        <strong>{{$noSpk}}</strong> tanggal <strong>{{$tglDroping}}</strong>, berikut segala perubahan / penambahannya di kemudian hari, maka PIHAK KEDUA / DEBITUR secara fiduciaire kepada PIHAK KESATU / KREDITUR atas barang-barang yang diuraikan dalam daftar terlampir.
                     </p>
                 </div>
                 <div class="row p-3 mb-2">
@@ -114,7 +116,7 @@
                         <p><strong>PASAL 10:</strong> Khusus untuk BARANG-BARANG perdagangan, PIHAK KESATU / KREDITUR dengan ini 
                         memberi kuasa kepada PIHAK KEDUA / DEBITUR untuk menjual BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
                         dengan ketentuan bahwa setiap waktu nilai / harga dari BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
-                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  125,000,000  
+                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  125,000,000 (dari mana blum ketemu)  
                         PIHAK KESATU / KREDITUR berhak sewaktu-waktu menarik kembali kuasa tersebut.</p>
 
                         <p><strong>PASAL 11:</strong> PIHAK KEDUA / DEBITUR wajib mengasuransikan BARANG-BARANG itu terhadap kebakaran, 
@@ -165,7 +167,7 @@
                         itu dengan suatu penyerahan yang sederhana. __________________________________________</p>
 
                         <p><strong>PASAL 16:</strong>  Mengenai perjanjian ini dan segala akibat hukumnya kedua belah pihak memiliki 
-                        domisili umum dan tetapi di kantor Panitera Pengadilan Negeri di KENDAL. ___________________________</p>
+                        domisili umum dan tetapi di kantor Panitera Pengadilan Negeri di {{$kotaPengadilanDeb}}. ___________________________</p>
                     </div>
                 </div>
 
@@ -176,8 +178,8 @@
                     <td><strong>PIHAK KEDUA</strong> <br> DEBITUR</td>
                 </tr>
                 <tr>
-                    <td><br><br><br><strong>ANDIN SYAMSUL RIZAL, ST</strong></td>
-                    <td><br><br><br><strong>AGUS SETIAWAN</strong></td>
+                    <td><br><br><br><strong>{{$namaKacab}}</strong></td>
+                    <td><br><br><br><strong>{{$namaDebitur}}</strong></td>
                 </tr>
             </table>
         </div>
