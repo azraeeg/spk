@@ -22,8 +22,8 @@
 
                 <div class="col-md-12">
                     <p><strong>Kepada Yth.</strong></p>
-                    <p>Sdr : <strong>AGUS SETIAWAN</strong></p>
-                    <p>Di <strong>SEMBUNG 13/02, CEPIRING, KENDAL</strong></p>
+                    <p>Sdr : <strong>{{$namaDebitur}}</strong></p>
+                    <p>Di <strong>{{$alamatDeb}}</strong></p>
                     <h5><strong>Perihal: Persetujuan Pemberian Fasilitas Kredit</strong></h5>
                 </div>
 
@@ -37,41 +37,43 @@
                 <div class="col-md-12">
                     <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
                         <tr>
-                            <td style="padding: 5px;"><strong>Sifat Kredit</strong></td>
-                            <td style="padding: 5px;">3</td>
+                            <td style="padding: 5px;"><strong>Sifat Kredit </strong></td>
+                            <td style="padding: 5px;">: {{$sifatKred}}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 5px;"><strong>Jenis Guna</strong></td>
-                            <td style="padding: 5px;">10</td>
+                            <td style="padding: 5px;"><strong>Jenis Guna </strong></td>
+                            <td style="padding: 5px;">: {{$jenisGuna}}</td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="padding: 5px;"><strong>TAMBAH MODAL DAGANG HASIL BUMI</strong></td>
+                            <td style="padding: 5px;"><strong></strong></td>
+                            <td style="padding: 5px;">: TAMBAH MODAL DAGANG HASIL BUMI</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Plafond</strong></td>
-                            <td style="padding: 5px;">Rp. 100,000,000</td>
+                            <td style="padding: 5px;">: Rp. {{ number_format($plafondKred, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Suku Bunga</strong></td>
-                            <td style="padding: 5px;">11.4%</td>
+                            <td style="padding: 5px;">: {{$bunga}}%</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Jangka Waktu</strong></td>
-                            <td style="padding: 5px;">60 bulan</td>
+                            <td style="padding: 5px;">: {{$jangkaWaktu}} bulan</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Pengikatan</strong></td>
-                            <td style="padding: 5px;">SKMHT</td>
+                            <td style="padding: 5px;">: {{$pengikatanKred}}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Jaminan</strong></td>
-                            <td style="padding: 5px;">APHT</td>
+                            <td style="padding: 5px;">: {{$pengikatanJaminan}}</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="col-md-12 mt-3">
-                    <p><strong>Jaminan:</strong></p>
+                    <p><strong>Jaminan:</strong></p> 
+                    <!-- NANTI DI FOREACH DARI DB JAMINAN SESUAI DENGAN noSpk yang jadi parameter -->
                     <ul>
                         <li>Sebidang Tanah DAN BANGUNAN, terletak di GONDANG 001/005 CEPIRING KENDAL, luas tanah (m²)
                             425, SHM / HGB / NIB No.00886, atas nama AGUS SETIAWAN, Jaminan milik SENDIRI.</li>
@@ -112,9 +114,9 @@
                         <td colspan="2" style="height: 50px;"></td>
                     </tr>
                     <tr>
-                        <td style="text-align: center; font-weight: bold;">ANDIN SYAMSUL RIZAL, ST</td>
-                        <td style="text-align: center; font-weight: bold;">AGUS SETIAWAN</td>
-                        <td style="text-align: center; font-weight: bold;">LINDA SETYANTI</td>
+                        <td style="text-align: center; font-weight: bold;">{{$namaKacab}}</td>
+                        <td style="text-align: center; font-weight: bold;">{{$namaDebitur}}</td>
+                        <td style="text-align: center; font-weight: bold;">{{$namaIstri}}</td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">KKPO</td>
