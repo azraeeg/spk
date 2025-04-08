@@ -30,15 +30,15 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding: 5px;"><strong>Nama</strong></td>
-                            <td style="padding: 5px;">AGUS SETIAWAN</td>
+                            <td style="padding: 5px;">{{$namaDebitur}}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Alamat</strong></td>
-                            <td style="padding: 5px;">SEMBUNG 13/02, CEPIRING, KENDAL</td>
+                            <td style="padding: 5px;">{{$alamatDeb}}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Keperluan</strong></td>
-                            <td style="padding: 5px;">APHT</td>
+                            <td style="padding: 5px;">{{$pengikatanJaminan}}</td>
                         </tr>
                     </table>
                 </div>
@@ -56,27 +56,38 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding: 5px;"><strong>Pokok</strong></td>
-                            <td style="padding: 5px;">Rp. 100,000,000</td>
+                            <td style="padding: 5px;">Rp. {{ number_format($plafondKred, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Bunga</strong></td>
-                            <td style="padding: 5px;">11.4 %</td>
+                            <td style="padding: 5px;">{{$bunga}} %</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Administrasi</strong></td>
-                            <td style="padding: 5px;">Rp. 300,000</td>
+                            <td style="padding: 5px;">Rp. {{ number_format($adm, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Provisi</strong></td>
-                            <td style="padding: 5px;">2 %</td>
+                            <td style="padding: 5px;">{{$provisi}} %</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Jangka Waktu</strong></td>
-                            <td style="padding: 5px;">60 bulan</td>
+                            <td style="padding: 5px;">{{$jangkaWaktu}} bulan</td>
                         </tr>
                         <tr>
-                            <td style="padding: 5px;"><strong>Jenis Kredit</strong></td>
-                            <td style="padding: 5px;">KREDIT INSTALMENT Modal Kerja</td>
+                        @php
+                            use Illuminate\Support\Str;
+
+                            $outputJenisKredit = $fasilitasKred;
+
+                            if (Str::contains(strtolower($fasilitasKred), 'instalment')) {
+                                $outputJenisKredit = 'KREDIT INSTALMENT ' . trim(Str::after(strtolower($fasilitasKred), 'instalment'));
+                            } elseif (Str::contains(strtolower($fasilitasKred), 'reguler')) {
+                                $outputJenisKredit = 'KREDIT REGULER ' . trim(Str::after(strtolower($fasilitasKred), 'reguler'));
+                            }
+                        @endphp
+                        <td style="padding: 5px;"><strong>Jenis Kredit</strong></td>
+                        <td style="padding: 5px;">{{ ucfirst($outputJenisKredit) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -85,6 +96,7 @@
             <div class="row p-3 mb-2">
                 <div class="col-md-12">
                     <p><strong>Barang jaminan berupa:</strong></p>
+                    <!-- nanti di foreach dari db jamainan sesuai dengan noSpk -->
                     <ul>
                         <li>Sebidang Tanah DAN BANGUNAN, terletak di GONDANG 001/005 CEPIRING KENDAL, luas tanah (m2) 425, SHM / HGB / NIB No.00886, atas nama AGUS SETIAWAN, Jaminan milik SENDIRI, NILAI WAJAR Rp. 300,000,000.</li>
                         <li>Kendaraan roda 2, Merk/Tahun: HONDA / 2024, Type: SPM, BPKB Nomor: J-989898989898, Nomor Polisi: H-1234-GL, Atas Nama: AGUS SETIAWAN, Jaminan Milik: SENDIRI, NILAI HT Rp. 25,000,000.</li>
