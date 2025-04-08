@@ -199,6 +199,30 @@
                             <label for="totBiaya">TOTAL BIAYA :</label>
                             <input type="text" class="form-control" name="totBiaya" required placeholder="Bila jumlah lebih atau = 1 juta ditulis =w4, kalau kurang dari 1 juta ditulis =x4">
                         </div>
+                        <div class="form-group">
+                            <label for="sifatKred">SIFAT KREDIT :</label>
+                            <select class="form-control" name="sifatKred" required>
+                                <option value=""></option>
+                                <option value="Instalment modal kerja">Instalment</option>
+                                <option value="Instalment investasi">Reguler</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="jenisGuna">JENIS GUNA :</label>
+                            <input type="text" class="form-control" name="jenisGuna" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="penggunaanKred">PENGGUNAAN KREDIT :</label>
+                            <input type="text" class="form-control" name="penggunaanKred" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pengikatanKred">PENGIKATAN KREDIT :</label>
+                            <input type="text" class="form-control" name="pengikatanKred" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pengikatanJaminan">PENGIKATAN JAMINAN :</label>
+                            <input type="text" class="form-control" name="pengikatanJaminan" required>
+                        </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">

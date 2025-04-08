@@ -66,6 +66,11 @@ class SpkController extends Controller
             'angPokBung' => 'required',
             'angBung' => 'required',
             'totBiaya' => 'required',
+            'sifatKred' => 'required',
+            'jenisGuna' => 'required',
+            'penggunaanKred' => 'required',
+            'pengikatanKred' => 'required',
+            'pengikatanJaminan' => 'required',
         ], [
             'noSpk.unique' => 'Gagal input, No. SPK sudah terdaftar.',
         ]);
@@ -123,6 +128,11 @@ class SpkController extends Controller
             'angPokBung' => $request->input('angPokBung'),
             'angBung' => $request->input('angBung'),
             'totBiaya' => $request->input('totBiaya'),
+            'sifatKred' => $request->input('sifatKred'),
+            'jenisGuna' => $request->input('jenisGuna'),
+            'penggunaanKred' => $request->input('penggunaanKred'),
+            'pengikatanKred' => $request->input('pengikatanKred'),
+            'pengikatanJaminan' => $request->input('pengikatanJaminan'),
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
 
@@ -208,6 +218,11 @@ class SpkController extends Controller
             'angPokBung' => 'required',
             'angBung' => 'required',
             'totBiaya' => 'required',
+            'sifatKred' => 'required',
+            'jenisGuna' => 'required',
+            'penggunaanKred' => 'required',
+            'pengikatanKred' => 'required',
+            'pengikatanJaminan' => 'required',
         ]);
 
 
@@ -257,6 +272,11 @@ class SpkController extends Controller
             'angPokBung' => $request->angPokBung,
             'angBung' => $request->angBung,
             'totBiaya' => $request->totBiaya,
+            'sifatKred' => $request->sifatKred,
+            'jenisGuna' => $request->jenisGuna,
+            'penggunaanKred' => $request->penggunaanKred,
+            'pengikatanKred' => $request->pengikatanKred,
+            'pengikatanJaminan' => $request->pengikatanJaminan,
         ]);
 
 
@@ -436,6 +456,11 @@ class SpkController extends Controller
         $adm = DB::table('form_spk')->where('noSpk', $noSpk)->value('adm');
         $namaKacab = DB::table('form_spk')->where('noSpk', $noSpk)->value('namaKacab');
         $fasilitasKred = DB::table('form_spk')->where('noSpk', $noSpk)->value('fasilitasKred');
+        $sifatKred = DB::table('form_spk')->where('noSpk', $noSpk)->value('sifatKred');
+        $jenisGuna = DB::table('form_spk')->where('noSpk', $noSpk)->value('jenisGuna');
+        $penggunaanKred = DB::table('form_spk')->where('noSpk', $noSpk)->value('penggunaanKred');
+        $pengikatanKred = DB::table('form_spk')->where('noSpk', $noSpk)->value('pengikatanKred');
+        $pengikatanJaminan = DB::table('form_spk')->where('noSpk', $noSpk)->value('pengikatanJaminan');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($provisi / 100) * $plafondKred;
@@ -474,7 +499,7 @@ class SpkController extends Controller
             'jangkaWaktu','jangkaWaktuTerbilang','tglDroping','tglJatuhTempo','bunga','adm',
             'bungaTerbilang','noRekTab','provisiTerbilang','provisi','nilaiProvisi','nilaiProvisiTerbilang',
             'admTerbilang','cicilanBulanan','cicilanBulananTerbilang','denda','dendaTerbilang','namaKacab',
-            'fasilitasKred'
+            'fasilitasKred','sifatKred','jenisGuna','penggunaanKred','pengikatanKred','pengikatanJaminan'
 
         ));
     }

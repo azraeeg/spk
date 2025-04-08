@@ -51,13 +51,7 @@
                     
                     
                         <div class="col-md-12">
-                            <p><strong>2.</strong> Sifat Kredit : 
-                                @if(stripos($fasilitasKred, 'instalment') !== false)
-                                    Instalment
-                                @else
-                                    Reguler
-                                @endif
-                            </p>
+                            <p><strong>2.</strong> Sifat Kredit : {{$sifatKred}}</p>
                         </div>
                     
                         <div class="col-md-12">
@@ -92,23 +86,31 @@
                                         - % dari plafond
                                     @endif
                                 </li>
-                                <li>Pengikatan Kredit: SKMHT</li>
-                                <li>Pengikatan Jaminan: APHT</li>
-                                <li>Penalty: Total Tunggakan Angsuran x 0.95% per bulan</li>
+                                <li>Pengikatan Kredit: {{$pengikatanKred}}</li>
+                                <li>Pengikatan Jaminan: {{$pengikatanJaminan}}</li>
+                                <li>Penalty: Total Tunggakan Angsuran x {{ number_format($bunga / 12, 2) }}% per bulan</li>
                             </ul>
-                        </div>                    
+                        </div>
+
                         <div class="col-md-12">
-                        <p><strong>5.</strong>Suku Bunga: 11.4%</p>
+                        <p><strong>5.</strong> Suku Bunga: {{ number_format($bunga, 1, ',', '.') }}%</p>
                             <ul style="list-style-type: lower-alpha; padding-left: 50px;">
                                 <li>Metode Perhitungan: Fixed Rate</li>
-                                <li>Cara Perhitungan: Flat</li>
-                                <li>Pembebanan: Setiap tanggal 26</li>
+                                <li>Cara Perhitungan: 
+                                @if(stripos($fasilitasKred, 'instalment') !== false)
+                                    Flat
+                                @else
+                                    Sliding
+                                @endif
+                                </li>
+                                <li>Pembebanan: Setiap tanggal {{ date('j') }}</li>
+
                                 <li>Penyesuaian Suku Bunga Pasar: Tetap</li>
                             </ul>
                         </div>
                    
                         <div class="col-md-12">
-                        <p><strong>6.</strong>Jangka Waktu : </p>
+                        <p><strong>6.</strong>Jangka Waktu : {{$jangkaWaktu}} bulan</p>
                         </div>
                     
                         <div class="col-md-12">
@@ -130,9 +132,9 @@
                             <td colspan="2" style="height: 50px;"></td>
                         </tr>
                         <tr>
-                            <td style="text-align: center; font-weight: bold;">ANDIN SYAMSUL RIZAL, ST</td>
-                            <td style="text-align: center; font-weight: bold;">AGUS SETIAWAN</td>
-                            <td style="text-align: center; font-weight: bold;">LINDA SETYANTI</td>
+                            <td style="text-align: center; font-weight: bold;">{{$namaKacab}}</td>
+                            <td style="text-align: center; font-weight: bold;">{{$namaDebitur}}</td>
+                            <td style="text-align: center; font-weight: bold;">{{$namaIstri}}</td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">KKPO</td>
