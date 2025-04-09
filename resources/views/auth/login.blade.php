@@ -45,7 +45,7 @@
       <form action="{{ route('login-proses') }}" method="post">
     @csrf
     <div class="input-group mb-3">
-        <input type="text" name="Nopeg" class="form-control" placeholder="Nopeg">
+        <input type="text" name="Nopeg" class="form-control" placeholder="Username">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-user"></span>
