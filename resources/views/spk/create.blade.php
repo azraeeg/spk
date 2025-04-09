@@ -209,7 +209,14 @@
                         </div>
                         <div class="form-group">
                             <label for="jenisGuna">JENIS GUNA :</label>
-                            <input type="text" class="form-control" name="jenisGuna" required>
+                            <select class="form-control" name="jenisGuna" required>
+                                <option value=""></option>
+                                <option value="Modal Kerja">10-Modal Kerja</option>
+                                <option value="Investasi">20-Investasi</option>
+                                <option value="Kredit Pemilikan Rumah">31-Kons: Kredit Pemilikan Rumah</option>
+                                <option value="Kredit Kendaraan Bermotor">35-Kons: Kredit Kendaraan Bermotor</option>
+                                <option value="Kredit Konsumsi Lainnya">39-Kons: Kredit Konsumsi Lainnya</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="penggunaanKred">PENGGUNAAN KREDIT :</label>

@@ -44,10 +44,10 @@
                             <td style="padding: 5px;"><strong>Jenis Guna </strong></td>
                             <td style="padding: 5px;">: {{$jenisGuna}}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td style="padding: 5px;"><strong></strong></td>
                             <td style="padding: 5px;">: TAMBAH MODAL DAGANG HASIL BUMI</td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td style="padding: 5px;"><strong>Plafond</strong></td>
                             <td style="padding: 5px;">: Rp. {{ number_format($plafondKred, 0, ',', '.') }}</td>
