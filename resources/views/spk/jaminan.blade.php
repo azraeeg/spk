@@ -17,8 +17,10 @@
     @endif
 
     
-<div class="col-md-12">
-
+    <div class="col-sm-6">
+        <h1 class="m-0">Pilih Jaminan</h1>
+    </div>
+<div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -61,6 +63,22 @@
               </div>
               <div class="icon">
                 <i class="fas fas fa-money-bill-wave">
+
+                </i>
+              </div>
+              <a href="#" class="small-box-footer">Isi data jaminan <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>TANPA JAMINAN</h3>
+
+                <p>Kerjasama</p>
+              </div>
+              <div class="icon">
+                <i class="fas fas fa-handshake">
 
                 </i>
               </div>

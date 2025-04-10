@@ -148,7 +148,7 @@ class SpkController extends Controller
 
     public function jaminanBpkb()
     {
-        return view('spk.jmnbpkb');
+        return view('spk.bpkb');
     }
 
 
