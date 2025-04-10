@@ -136,8 +136,21 @@ class SpkController extends Controller
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
 
-        return redirect()->route('admin.spk.index')->with('success', 'Data berhasil disimpan.');
+        // return redirect()->route('admin.spk.index')->with('success', 'Data berhasil disimpan.');
+        return redirect()->route('spk.jaminan')->with('success', 'Data berhasil disimpan, lanjut ke halaman jaminan.');
+
     }
+
+    public function jaminan()
+    {
+        return view('spk.jaminan');
+    }
+
+    public function jaminanBpkb()
+    {
+        return view('spk.jmnbpkb');
+    }
+
 
     
 

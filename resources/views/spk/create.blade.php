@@ -21,11 +21,11 @@
             <!-- general form elements -->
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Pengisian SPK BPR NUSAMBA</h3>
+                <h3 class="card-title">Pengisian Data Debitur</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('admin.spk.create') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('admin.spk.jaminan') }}" method="get" >
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
@@ -233,16 +233,10 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info">Submit</button>
+                        <button type="submit" class="btn btn-info">Selanjutnya</button>
                     </div>
                 </form>
 
 </div>
 </div>
-<script>
-        function displayFileName(inputId) {
-        var fileName = document.getElementById(inputId).files[0].name;
-        document.getElementById('fileLabel' + inputId.substr(4)).innerText = fileName;
-    }
-</script>
 @endsection

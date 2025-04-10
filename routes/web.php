@@ -63,7 +63,10 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
     // ====================read spk=================
     Route::get('/spk', [SpkController::class, 'index'])->name('spk.index');
-    Route::post('/spk', [SpkController::class, 'store'])->name('spk.store');
+    Route::get('/spk', [SpkController::class, 'store'])->name('spk.store');
+    Route::get('/spk/jaminan', [SpkController::class, 'jaminan'])->name('spk.jaminan');
+    Route::get('/spk/jaminanbpkb', [SpkController::class, 'jaminanBpkb'])->name('spk.jaminanbpkb');
+
     Route::get('/spk/{noSpk}/edit', [SpkController::class, 'edit'])->name('spk.edit');
     Route::put('/spk/{noSpk}', [SpkController::class, 'update'])->name('spk.update');
     Route::delete('/spk/{noSpk}', [SpkController::class, 'destroy'])->name('spk.destroy');
