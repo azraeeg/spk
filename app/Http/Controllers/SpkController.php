@@ -77,14 +77,8 @@ class SpkController extends Controller
 
         // Ambil data pengguna yang sedang login
         $user = Auth::user();
-        // dd(DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->first());
-
-
         // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
         $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
-        // dd($kd_cabang);
-        
-        // $user->choper ? $user->choper->kd_cabang : null;
 
         // Simpan data ke tabel form_spk
         DB::table('form_spk')->insert([
@@ -135,11 +129,14 @@ class SpkController extends Controller
             'pengikatanJaminan' => $request->input('pengikatanJaminan'),
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
-
-        // return redirect()->route('admin.spk.index')->with('success', 'Data berhasil disimpan.');
-        return redirect()->route('spk.jaminan')->with('success', 'Data berhasil disimpan, lanjut ke halaman jaminan.');
+        // Simpan noSpk ke session
+        session(['noSpk' => $request->input('noSpk')]);
+        return view('spk.jaminan', ['success' => 'Data berhasil disimpan, lanjut ke halaman jaminan.']);
 
     }
+
+    
+    // ===============create jaminan=================
 
     public function jaminan()
     {
@@ -149,6 +146,53 @@ class SpkController extends Controller
     public function jaminanBpkb()
     {
         return view('spk.bpkb');
+    }
+    public function storeDataBpkb(Request $request)
+    {
+        $request->validate([
+            'kendRoda' => 'required', 
+            'merek' => 'required',
+            'tahun' => 'required',
+            'tipe' => 'required',
+            'noBpkb' => 'required',
+            'noPol' => 'required',
+            'atasNama' => 'required',
+            'pemilik' => 'required',
+            'noRangka' => 'required',
+            'noMesin' => 'required',
+            'bahanBakar' => 'required',
+            'nilaiHt' => 'required',
+        ]);
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+        // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
+        $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
+        // Simpan data ke tabel form_spk
+        $noSpk = session('noSpk');
+            if (!$noSpk) {
+                return redirect()->back()->with('error', 'Data No. SPK tidak ditemukan. Silakan isi data SPK terlebih dahulu.');
+            }
+        DB::table('jmnbpkb')->insert([
+            'kendRoda' => $request->input('kendRoda'),
+            'merek' => $request->input('merek'),
+            'tahun' => $request->input('tahun'),
+            'tipe' => $request->input('tipe'),
+            'noBpkb' => $request->input('noBpkb'),
+            'noPol' => $request->input('noPol'),
+            'atasNama' => $request->input('atasNama'),
+            'pemilik' => $request->input('pemilik'),
+            'noRangka' => $request->input('noRangka'),
+            'noMesin' => $request->input('noMesin'),
+            'bahanBakar' => $request->input('bahanBakar'),
+            'nilaiHt' => $request->input('nilaiHt'),
+            'noSpk' => $noSpk,
+            'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
+        ]);
+        return view('spk.jaminan', [
+            'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
+        ]);
+        
+
     }
 
 

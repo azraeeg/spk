@@ -25,7 +25,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="{{ route('admin.spk.jaminan') }}" method="get" >
+              <form action="{{ route('admin.spk.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
