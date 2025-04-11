@@ -231,12 +231,12 @@
                             <input type="text" class="form-control" name="pengikatanJaminan" required>
                         </div>
                     <!-- /.card-body -->
+                    </div>
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-info">Selanjutnya</button>
                     </div>
                 </form>
-
-</div>
+            </div>
 </div>
 @endsection

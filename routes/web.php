@@ -66,7 +66,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::post('/spk', [SpkController::class, 'storeData'])->name('spk.store');
     Route::get('/spk/jaminan', [SpkController::class, 'jaminan'])->name('spk.jaminan');
     Route::get('/spk/jaminanbpkb', [SpkController::class, 'jaminanBpkb'])->name('spk.jaminanbpkb');
-    Route::post('/spk/jaminanbpkb', [SpkController::class, 'storeDataBpkb'])->name('spk.storeDataBpkb');
+    Route::post('/spk/jaminanbpkbpost', [SpkController::class, 'storeDataBpkb'])->name('spk.storeDataBpkb');
+    Route::get('/spk/jaminansertif', [SpkController::class, 'jaminanSertif'])->name('spk.jaminansertif');
+    Route::post('/spk/jaminansertifpost', [SpkController::class, 'storeDataSertif'])->name('spk.storeDataSertif');
+    Route::get('/spk/jaminanrekening', [SpkController::class, 'jaminanRekening'])->name('spk.jaminanrekening');
+    Route::post('/spk/jaminanrekeningpost', [SpkController::class, 'storeDataRek'])->name('spk.storeDataRek');
 
     Route::get('/spk/{noSpk}/edit', [SpkController::class, 'edit'])->name('spk.edit');
     Route::put('/spk/{noSpk}', [SpkController::class, 'update'])->name('spk.update');

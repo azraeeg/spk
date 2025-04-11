@@ -191,8 +191,89 @@ class SpkController extends Controller
         return view('spk.jaminan', [
             'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
         ]);
-        
+    }
 
+
+    public function jaminanSertif()
+    {
+        return view('spk.sertifikat');
+    }
+    public function storeDataSertif(Request $request)
+    {
+        $request->validate([
+            'sebidangTanah' => 'required', 
+            'terletakDi' => 'required',
+            'luasTanah' => 'required',
+            'shm' => 'required',
+            'hgb' => 'required',
+            'nib' => 'required',
+            'suratUkur' => 'required',
+            'jenisBangunan' => 'required',
+            'atasNama' => 'required',
+            'pemilik' => 'required',
+            'nilaiWajar' => 'required',
+        ]);
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+        // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
+        $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
+        // Simpan data ke tabel form_spk
+        $noSpk = session('noSpk');
+            if (!$noSpk) {
+                return redirect()->back()->with('error', 'Data No. SPK tidak ditemukan. Silakan isi data SPK terlebih dahulu.');
+            }
+        DB::table('jmnsertifikat')->insert([
+            'sebidangTanah' => $request->input('sebidangTanah'),
+            'terletakDi' => $request->input('terletakDi'),
+            'luasTanah' => $request->input('luasTanah'),
+            'shm' => $request->input('shm'),
+            'hgb' => $request->input('hgb'),
+            'nib' => $request->input('nib'),
+            'suratUkur' => $request->input('suratUkur'),
+            'jenisBangunan' => $request->input('jenisBangunan'),
+            'atasNama' => $request->input('atasNama'),
+            'pemilik' => $request->input('pemilik'),
+            'nilaiWajar' => $request->input('nilaiWajar'),
+            'noSpk' => $noSpk,
+            'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
+        ]);
+        return view('spk.jaminan', [
+            'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
+        ]);
+    }
+
+    public function jaminanRekening()
+    {
+        return view('spk.rekening');
+    }
+    public function storeDataRek(Request $request)
+    {
+        $request->validate([
+            'noBilyet' => 'required', 
+            'noRek' => 'required',
+            'atasNama' => 'required',
+            'taksasi' => 'required',
+        ]);
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+        // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
+        $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
+        // Simpan data ke tabel form_spk
+        $noSpk = session('noSpk');
+            if (!$noSpk) {
+                return redirect()->back()->with('error', 'Data No. SPK tidak ditemukan. Silakan isi data SPK terlebih dahulu.');
+            }
+        DB::table('jmnrekening')->insert([
+            'noBilyet' => $request->input('noBilyet'),
+            'noRek' => $request->input('noRek'),
+            'atasNama' => $request->input('atasNama'),
+            'taksasi' => $request->input('taksasi'),
+            'noSpk' => $noSpk,
+            'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
+        ]);
+        return view('spk.jaminan', [
+            'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
+        ]);
     }
 
 
