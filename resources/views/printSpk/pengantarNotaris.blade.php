@@ -8,7 +8,7 @@
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
                     <h3><strong>BPR NUSAMBA CEPIRING</strong></h3>
-                    <p>51497</p>
+                    <p>{{$noCif}}</p>
                     <hr style="margin: auto; border: 1px solid black;">
                     <h4><strong>SURAT PENGANTAR NOTARIS</strong></h4>
                 </div>
@@ -118,11 +118,55 @@
                 <div class="col-md-12">
                     <p><strong>Barang jaminan berupa:</strong></p>
                     <!-- nanti di foreach dari db jamainan sesuai dengan noSpk -->
-                    <ul>
-                        <li>Sebidang Tanah DAN BANGUNAN, terletak di GONDANG 001/005 CEPIRING KENDAL, luas tanah (m2) 425, SHM / HGB / NIB No.00886, atas nama AGUS SETIAWAN, Jaminan milik SENDIRI, NILAI WAJAR Rp. 300,000,000.</li>
-                        <li>Kendaraan roda 2, Merk/Tahun: HONDA / 2024, Type: SPM, BPKB Nomor: J-989898989898, Nomor Polisi: H-1234-GL, Atas Nama: AGUS SETIAWAN, Jaminan Milik: SENDIRI, NILAI HT Rp. 25,000,000.</li>
-                        <li>Kendaraan roda 4, Merk/Tahun: Toyota / Yaris, Type: MPNP, BPKB Nomor: G-99898989, Nomor Polisi: H-5645-HB, Atas Nama: AGUS SETIAWAN, Jaminan Milik: SENDIRI, TAKSASI Rp. 100,000,000.</li>
-                    </ul>
+                     
+                    @php $counter = 0; @endphp
+                    @foreach ($jmnSertifikat as $index => $sertifikat)
+                    <div class="col-md-12">
+                        <p>
+                            <strong>{{ chr(97 + $counter) }}. Sebidang tanah beserta segala turutannya yang berdiri di atasnya sebagaimana dengan tanda bukti hak sebagai berikut :</strong>
+                        </p>
+                        <ul>
+                            <li><strong>No. SHM/SHGB/NIB:</strong> {{ $sertifikat->shmShgbNib }} - 
+                                <strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($sertifikat->tglShmShgbNib)->translatedFormat('d F Y') }}</li>
+                            <li><strong>Surat Ukur/Gambar Situasi:</strong> {{ $sertifikat->suratUkur }} - 
+                                <strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($sertifikat->tglSuratUkur)->translatedFormat('d F Y') }}</li>
+                            <li><strong>Luas Tanah:</strong> {{ number_format($sertifikat->luasTanah, 0, ',', '.') }} m²</li>
+                            <li><strong>Jenis Bangunan:</strong> {{ $sertifikat->jenisBangunan }}</li>
+                            <li><strong>Lokasi:</strong> {{ $sertifikat->terletakDi }}</li>
+                            <li><strong>Atas Nama Pemegang Hak:</strong> {{ $sertifikat->atasNama }}</li>
+                        </ul>
+                    </div>
+                    @php $counter++; @endphp
+                    @endforeach
+                    @foreach($jmnbpkb as $index => $item)
+                    <div class="col-md-12">
+                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda Empat:</strong></p>
+                        <ul>
+                            <li><strong>Bukti Kepemilikan Nomor:</strong> {{ $item->noBpkb }}</li>
+                            <li><strong>Type:</strong> {{ $item->tipe }}</li>
+                            <li><strong>Nomor Rangka:</strong> {{ $item->noRangka }}</li>
+                            <li><strong>Nomor Mesin:</strong> {{ $item->noMesin }}</li>
+                            <li><strong>Bahan Bakar:</strong> {{ $item->bahanBakar }}</li>
+                            <li><strong>Nomor Polisi:</strong> {{ $item->noPol }}</li>
+                            <li><strong>Merk / Tahun:</strong> {{ $item->merek }} / {{ $item->tahun }}</li>
+                            <li><strong>Atas Nama:</strong> {{ $item->atasNama }}</li>
+                        </ul>
+                    </div>
+                    @php $counter++; @endphp
+                    @endforeach
+                    {{-- Jaminan Rekening --}}
+                    @foreach($jmnrekening as $item)
+                    <div class="col-md-12">
+                        <p><strong>{{ chr(97 + $counter) }}. Rekening / Deposito / Tabungan:</strong></p>
+                        <ul>
+                            <li><strong>No. Bilyet:</strong> {{ $item->noBilyet }}</li>
+                            <li><strong>No. Rekening:</strong> {{ $item->noRek }}</li>
+                            <li><strong>Atas Nama:</strong> {{ $item->atasNama }}</li>
+                            <li><strong>Nilai Taksasi:</strong> Rp {{ number_format($item->taksasi, 0, ',', '.') }}</li>
+                        </ul>
+                    </div>
+                    @php $counter++; @endphp
+                    @endforeach
                 </div>
             </div>
 
@@ -142,7 +186,7 @@
                         <tr><td colspan="2" style="height: 80px;"></td></tr> <!-- spasi tanda tangan -->
                         <tr>
                             <td style="text-align: left; font-weight: bold;">{{$namaKacab}}</td>
-                            <td style="text-align: right; font-weight: bold;">FETO</td>
+                            <td style="text-align: right; font-weight: bold;">{{$admKredit}}</td>
                         </tr>
                         <tr>
                             <td style="text-align: left;">KKPO</td>

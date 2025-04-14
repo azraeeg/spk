@@ -116,7 +116,7 @@
                         <p><strong>PASAL 10:</strong> Khusus untuk BARANG-BARANG perdagangan, PIHAK KESATU / KREDITUR dengan ini 
                         memberi kuasa kepada PIHAK KEDUA / DEBITUR untuk menjual BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
                         dengan ketentuan bahwa setiap waktu nilai / harga dari BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
-                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  125,000,000 (dari mana blum ketemu)  
+                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  {{ number_format($totalJaminan, 0, ',', '.') }} (dari mana blum ketemu)  
                         PIHAK KESATU / KREDITUR berhak sewaktu-waktu menarik kembali kuasa tersebut.</p>
 
                         <p><strong>PASAL 11:</strong> PIHAK KEDUA / DEBITUR wajib mengasuransikan BARANG-BARANG itu terhadap kebakaran, 

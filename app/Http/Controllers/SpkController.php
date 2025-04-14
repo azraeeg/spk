@@ -26,6 +26,7 @@ class SpkController extends Controller
     public function storeData(Request $request)
     {
         $request->validate([
+            'noCif' => 'required',
             'noRekKred' => 'required', 
             'noRekTab' => 'required',
             'noSpk' => 'required|unique:form_spk,noSpk',
@@ -79,9 +80,11 @@ class SpkController extends Controller
         $user = Auth::user();
         // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
         $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
+        $admKredit = $admKredit = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('Nama');
 
         // Simpan data ke tabel form_spk
         DB::table('form_spk')->insert([
+            'noCif' => $request->input('noCif'),
             'noRekKred' => $request->input('noRekKred'),
             'noRekTab' => $request->input('noRekTab'),
             'noSpk' => $request->input('noSpk'),
@@ -127,6 +130,7 @@ class SpkController extends Controller
             'penggunaanKred' => $request->input('penggunaanKred'),
             'pengikatanKred' => $request->input('pengikatanKred'),
             'pengikatanJaminan' => $request->input('pengikatanJaminan'),
+            'admKredit' => $admKredit,
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
         // Simpan noSpk ke session
@@ -204,10 +208,10 @@ class SpkController extends Controller
             'sebidangTanah' => 'required', 
             'terletakDi' => 'required',
             'luasTanah' => 'required',
-            'shm' => 'required',
-            'hgb' => 'required',
-            'nib' => 'required',
+            'shmShgbNib' => 'required',
             'suratUkur' => 'required',
+            'tglShmShgbNib' => 'required|date',
+            'tglSuratUkur' => 'required|date',
             'jenisBangunan' => 'required',
             'atasNama' => 'required',
             'pemilik' => 'required',
@@ -226,14 +230,14 @@ class SpkController extends Controller
             'sebidangTanah' => $request->input('sebidangTanah'),
             'terletakDi' => $request->input('terletakDi'),
             'luasTanah' => $request->input('luasTanah'),
-            'shm' => $request->input('shm'),
-            'hgb' => $request->input('hgb'),
-            'nib' => $request->input('nib'),
+            'shmShgbNib' => $request->input('shmShgbNib'),
             'suratUkur' => $request->input('suratUkur'),
             'jenisBangunan' => $request->input('jenisBangunan'),
             'atasNama' => $request->input('atasNama'),
             'pemilik' => $request->input('pemilik'),
             'nilaiWajar' => $request->input('nilaiWajar'),
+            'tglShmShgbNib' => $request->input('tglShmShgbNib'),
+            'tglSuratUkur' => $request->input('tglSuratUkur'),
             'noSpk' => $noSpk,
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
@@ -272,6 +276,35 @@ class SpkController extends Controller
             'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
         ]);
         return view('spk.jaminan', [
+            'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
+        ]);
+    }
+
+    public function tanpaJaminan()
+    {
+        return view('spk.tanpajaminan');
+    }
+
+    public function storeDataTanpaJaminan(Request $request)
+    {
+        $request->validate([
+            'tanpaJaminan' => 'required',
+        ]);
+        // Ambil data pengguna yang sedang login
+        $user = Auth::user();
+        // Pastikan user memiliki relasi ke choper dan mengambil kd_cabang
+        $kd_cabang = $kd_cabang = DB::table('choper')->where('Nopeg', Auth::user()->Nopeg)->value('kd_cabang');
+        // Simpan data ke tabel form_spk
+        $noSpk = session('noSpk');
+            if (!$noSpk) {
+                return redirect()->back()->with('error', 'Data No. SPK tidak ditemukan. Silakan isi data SPK terlebih dahulu.');
+            }
+        DB::table('tanpajaminan')->insert([
+            'tanpaJaminan' => $request->input('tanpaJaminan'),
+            'noSpk' => $noSpk,
+            'kd_cabang' => $kd_cabang, // Tambahkan kd_cabang dari choper
+        ]);
+        return view('dashboard', [
             'success' => 'Data berhasil disimpan, lanjut ke halaman jaminan untuk menambah jaminan lainnya.'
         ]);
     }
@@ -449,10 +482,19 @@ class SpkController extends Controller
     {
         // Ambil semua data SPK dalam satu query
         $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
 
         if (!$spk) {
             abort(404, 'Data SPK tidak ditemukan.');
         }
+
+        //ambil data dari tabel mstr_kacab
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('kantorCabang');
+        $tglSkKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('tglSkKacab');
+        $noSkKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('noSkKacab');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
@@ -482,7 +524,6 @@ class SpkController extends Controller
         return view('printSpk.installment', [
             'printInstallment' => [$spk],
             'noSpk' => $noSpk,
-            'kacab' => $spk->kacab,
             'namaDebitur' => $spk->namaDebitur,
             'namaIstri' => $spk->namaIstri,
             'pekerjaanDeb' => $spk->pekerjaanDeb,
@@ -499,9 +540,12 @@ class SpkController extends Controller
             'adm' => $spk->adm,
             'noRekTab' => $spk->noRekTab,
             'provisi' => $spk->provisi,
-            'namaKacab' => $spk->namaKacab,
             'pengikatanJaminan' => $spk->pengikatanJaminan,
             'umur' => $umur,
+            'namaKacab' => $namaKacab,
+            'kantorCabang' => $kantorCabang,
+            'tglSkKacab' => $tglSkKacab,
+            'noSkKacab' => $noSkKacab,
             'plafondTerbilang' => $plafondTerbilang,
             'jangkaWaktuTerbilang' => $jangkaWaktuTerbilang,
             'bungaTerbilang' => $bungaTerbilang,
@@ -513,6 +557,9 @@ class SpkController extends Controller
             'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
             'denda' => $denda,
             'dendaTerbilang' => $dendaTerbilang,
+            'jmnSertifikat' => $jmnSertifikat,
+            'jmnbpkb' => $jmnbpkb,
+            'jmnrekening' => $jmnrekening,
         ]);
     }
 
@@ -572,6 +619,9 @@ class SpkController extends Controller
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan.');
         }
+        //ambil data dari tabel mstr_kacab
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($data->provisi / 100) * $data->plafondKred;
@@ -604,7 +654,6 @@ class SpkController extends Controller
         return view('printSpk.transparansiProduk', [
             'printInstallment'          => [$data],
             'noSpk'                     => $data->noSpk,
-            'kacab'                     => $data->kacab,
             'namaDebitur'              => $data->namaDebitur,
             'namaIstri'                => $data->namaIstri,
             'pekerjaanDeb'             => $data->pekerjaanDeb,
@@ -632,7 +681,6 @@ class SpkController extends Controller
             'cicilanBulananTerbilang'  => $cicilanBulananTerbilang,
             'denda'                    => $denda,
             'dendaTerbilang'           => $dendaTerbilang,
-            'namaKacab'                => $data->namaKacab,
             'fasilitasKred'            => $data->fasilitasKred,
             'sifatKred'                => $data->sifatKred,
             'jenisGuna'                => $data->jenisGuna,
@@ -640,81 +688,96 @@ class SpkController extends Controller
             'pengikatanKred'           => $data->pengikatanKred,
             'pengikatanJaminan'        => $data->pengikatanJaminan,
             'umur'                     => $umur,
+            'namaKacab'                => $namaKacab,
         ]);
     }
 
     public function printPersetujuanKred($noSpk)
     {
-        // Ambil semua data dari form_spk berdasarkan noSpk
-        $printInstallment = DB::table('form_spk')->where('noSpk', $noSpk)->get();
+        // Ambil data utama dari form_spk
         $data = DB::table('form_spk')->where('noSpk', $noSpk)->first();
 
-        // Data utama
-        $kacab = $data->kacab;
-        $namaDebitur = $data->namaDebitur;
-        $namaIstri = $data->namaIstri;
-        $pekerjaanDeb = $data->pekerjaanDeb;
-        $alamatDeb = $data->alamatDeb;
-        $noKtpDeb = $data->noKtpDeb;
-        $noKtpIstri = $data->noKtpIstri;
-        $tahunLahirDeb = $data->tahunLahirDeb;
+        // Jika data tidak ditemukan
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
 
-        // Data tanggal dan jangka waktu
-        $tglPermohonan = $data->tglPermohonan;
-        $tglPersetujuan = $data->tglPersetujuan;
-        $tglDroping = $data->tglDroping;
-        $tglJatuhTempo = $data->tglJatuhTempo;
-        $jangkaWaktu = $data->jangkaWaktu;
+        //ambil data dari tabel mstr_kacab
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
 
-        // Data finansial
-        $plafondKred = $data->plafondKred;
-        $bunga = (float) $data->bunga;
-        $provisi = $data->provisi;
-        $adm = $data->adm;
-        $noRekTab = $data->noRekTab;
-        $namaKacab = $data->namaKacab;
+        // Ambil data jaminan
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
 
-        // Data jenis kredit
-        $sifatKred = $data->sifatKred;
-        $jenisGuna = $data->jenisGuna;
-        $pengikatanKred = $data->pengikatanKred;
-        $pengikatanJaminan = $data->pengikatanJaminan;
+        // Hitung nilai provisi
+        $nilaiProvisi = ($data->provisi / 100) * $data->plafondKred;
 
-        // Hitung nilai provisi dalam rupiah
-        $nilaiProvisi = ($provisi / 100) * $plafondKred;
-
-        // Hitung nilai cicilan bulanan
+        // Hitung cicilan bulanan
         $cicilanBulanan = 0;
-        if ($jangkaWaktu > 0) {
-            $cicilanBulanan = ($plafondKred / $jangkaWaktu) + (($plafondKred * $bunga) / 100 / 12);
+        if ($data->jangkaWaktu > 0) {
+            $cicilanBulanan = ($data->plafondKred / $data->jangkaWaktu) + (($data->plafondKred * $data->bunga) / 100 / 12);
         }
 
         // Hitung denda
-        $denda = $bunga > 0 ? $bunga / 12 : 0;
+        $denda = $data->bunga > 0 ? $data->bunga / 12 : 0;
 
-        // Hitung umur berdasarkan tahun lahir
-        $umur = $tahunLahirDeb ? Carbon::parse($tahunLahirDeb)->diffInYears(Carbon::now()) : null;
+        // Hitung umur
+        $umur = $data->tahunLahirDeb ? Carbon::parse($data->tahunLahirDeb)->diffInYears(Carbon::now()) : null;
 
-        // Konversi angka ke dalam teks (terbilang)
-        $plafondTerbilang = $this->konversiTerbilang($plafondKred);
-        $jangkaWaktuTerbilang = $this->konversiTerbilang($jangkaWaktu);
-        $bungaTerbilang = $this->konversiTerbilang($bunga);
-        $provisiTerbilang = $this->konversiTerbilang($provisi);
-        $nilaiProvisiTerbilang = $this->konversiTerbilang($nilaiProvisi);
-        $admTerbilang = $this->konversiTerbilang($adm);
-        $cicilanBulananTerbilang = $this->konversiTerbilang($cicilanBulanan);
-        $dendaTerbilang = $this->konversiTerbilang($denda);
+        // Konversi ke terbilang
+        $plafondTerbilang         = $this->konversiTerbilang($data->plafondKred);
+        $jangkaWaktuTerbilang     = $this->konversiTerbilang($data->jangkaWaktu);
+        $bungaTerbilang           = $this->konversiTerbilang($data->bunga);
+        $provisiTerbilang         = $this->konversiTerbilang($data->provisi);
+        $nilaiProvisiTerbilang    = $this->konversiTerbilang($nilaiProvisi);
+        $admTerbilang             = $this->konversiTerbilang($data->adm);
+        $cicilanBulananTerbilang  = $this->konversiTerbilang($cicilanBulanan);
+        $dendaTerbilang           = $this->konversiTerbilang($denda);
 
-        return view('printSpk.persetujuanKredit', compact(
-            'printInstallment', 'noSpk', 'kacab', 'namaDebitur', 'umur',
-            'namaIstri', 'pekerjaanDeb', 'alamatDeb', 'noKtpDeb', 'noKtpIstri',
-            'tglPermohonan', 'tglPersetujuan', 'plafondKred', 'plafondTerbilang',
-            'jangkaWaktu', 'jangkaWaktuTerbilang', 'tglDroping', 'tglJatuhTempo',
-            'bunga', 'bungaTerbilang', 'noRekTab', 'provisi', 'provisiTerbilang',
-            'nilaiProvisi', 'nilaiProvisiTerbilang', 'adm', 'admTerbilang',
-            'cicilanBulanan', 'cicilanBulananTerbilang', 'denda', 'dendaTerbilang',
-            'namaKacab', 'sifatKred', 'jenisGuna', 'pengikatanKred', 'pengikatanJaminan'
-        ));
+        return view('printSpk.persetujuanKredit', [
+            'printInstallment'          => [$data],
+            'noSpk'                     => $data->noSpk,
+            'namaDebitur'              => $data->namaDebitur,
+            'namaIstri'                => $data->namaIstri,
+            'pekerjaanDeb'             => $data->pekerjaanDeb,
+            'alamatDeb'                => $data->alamatDeb,
+            'noKtpDeb'                 => $data->noKtpDeb,
+            'noKtpIstri'               => $data->noKtpIstri,
+            'tahunLahirDeb'            => $data->tahunLahirDeb,
+            'umur'                     => $umur,
+            'tglPermohonan'            => $data->tglPermohonan,
+            'tglPersetujuan'           => $data->tglPersetujuan,
+            'tglDroping'               => $data->tglDroping,
+            'tglJatuhTempo'            => $data->tglJatuhTempo,
+            'jangkaWaktu'              => $data->jangkaWaktu,
+            'jangkaWaktuTerbilang'     => $jangkaWaktuTerbilang,
+            'plafondKred'              => $data->plafondKred,
+            'plafondTerbilang'         => $plafondTerbilang,
+            'bunga'                    => $data->bunga,
+            'bungaTerbilang'           => $bungaTerbilang,
+            'provisi'                  => $data->provisi,
+            'provisiTerbilang'         => $provisiTerbilang,
+            'nilaiProvisi'             => $nilaiProvisi,
+            'nilaiProvisiTerbilang'    => $nilaiProvisiTerbilang,
+            'adm'                      => $data->adm,
+            'admTerbilang'             => $admTerbilang,
+            'cicilanBulanan'           => $cicilanBulanan,
+            'cicilanBulananTerbilang'  => $cicilanBulananTerbilang,
+            'denda'                    => $denda,
+            'dendaTerbilang'           => $dendaTerbilang,
+            'noRekTab'                 => $data->noRekTab,
+            'sifatKred'                => $data->sifatKred,
+            'jenisGuna'                => $data->jenisGuna,
+            'pengikatanKred'           => $data->pengikatanKred,
+            'pengikatanJaminan'        => $data->pengikatanJaminan,
+            'jmnSertifikat'            => $jmnSertifikat,
+            'jmnbpkb'                  => $jmnbpkb,
+            'jmnrekening'              => $jmnrekening,
+            'namaKacab'                => $namaKacab,
+            'kantorCabang'             => $kantorCabang,
+        ]);
     }
 
     public function printFeo($noSpk)
@@ -722,13 +785,26 @@ class SpkController extends Controller
         // Ambil seluruh data form_spk dalam satu query
         $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
 
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
+
         // Cek jika data tidak ditemukan
         if (!$spk) {
             abort(404, 'Data SPK tidak ditemukan.');
         }
 
+        // Hitung total jaminan
+        $totalJaminan = 
+        $jmnrekening->sum('taksasi') +
+        $jmnbpkb->sum('nilaiHt') +
+        $jmnSertifikat->sum('nilaiWajar');
+
+
         // Ambil data kota dari mstr_kacab
         $kota = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('kota');
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
@@ -758,7 +834,6 @@ class SpkController extends Controller
         return view('printSpk.feo', [
             'printInstallment' => [$spk], // agar tetap bisa dipakai sebagai koleksi jika di view pakai loop
             'noSpk' => $noSpk,
-            'kacab' => $spk->kacab,
             'namaDebitur' => $spk->namaDebitur,
             'namaIstri' => $spk->namaIstri,
             'pekerjaanDeb' => $spk->pekerjaanDeb,
@@ -776,8 +851,8 @@ class SpkController extends Controller
             'noRekTab' => $spk->noRekTab,
             'provisi' => $spk->provisi,
             'adm' => $spk->adm,
-            'namaKacab' => $spk->namaKacab,
             'kota' => $kota,
+            'namaKacab' => $namaKacab,
             'umur' => $umur,
             'plafondTerbilang' => $plafondTerbilang,
             'jangkaWaktuTerbilang' => $jangkaWaktuTerbilang,
@@ -790,6 +865,12 @@ class SpkController extends Controller
             'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
             'denda' => $denda,
             'dendaTerbilang' => $dendaTerbilang,
+            'namaKacab' => $namaKacab,
+            'kantorCabang' => $kantorCabang,
+            'jmnSertifikat' => $jmnSertifikat,
+            'jmnbpkb' => $jmnbpkb,
+            'jmnrekening' => $jmnrekening,
+            'totalJaminan' => $totalJaminan,
         ]);
     }
 
@@ -798,10 +879,19 @@ class SpkController extends Controller
     {
         // Ambil seluruh data form_spk dalam satu query
         $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
 
         if (!$spk) {
             abort(404, 'Data SPK tidak ditemukan.');
         }
+
+        // Ambil data kota dari mstr_kacab
+        $kota = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('kota');
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
@@ -831,7 +921,7 @@ class SpkController extends Controller
         return view('printSpk.srhtrmjmn', [
             'printInstallment' => [$spk],
             'noSpk' => $noSpk,
-            'kacab' => $spk->kacab,
+            'noCif' => $spk->noCif,
             'namaDebitur' => $spk->namaDebitur,
             'namaIstri' => $spk->namaIstri,
             'pekerjaanDeb' => $spk->pekerjaanDeb,
@@ -849,7 +939,7 @@ class SpkController extends Controller
             'noRekTab' => $spk->noRekTab,
             'provisi' => $spk->provisi,
             'adm' => $spk->adm,
-            'namaKacab' => $spk->namaKacab,
+            'admKredit' => $spk->admKredit,
             'umur' => $umur,
             'plafondTerbilang' => $plafondTerbilang,
             'jangkaWaktuTerbilang' => $jangkaWaktuTerbilang,
@@ -862,6 +952,11 @@ class SpkController extends Controller
             'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
             'denda' => $denda,
             'dendaTerbilang' => $dendaTerbilang,
+            'namaKacab' => $namaKacab,
+            'kantorCabang' => $kantorCabang,
+            'jmnSertifikat' => $jmnSertifikat,
+            'jmnbpkb' => $jmnbpkb,
+            'jmnrekening' => $jmnrekening,
         ]);
     }
 
@@ -869,10 +964,19 @@ class SpkController extends Controller
     {
         // Ambil seluruh data form_spk dalam satu query
         $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
 
         if (!$spk) {
             abort(404, 'Data SPK tidak ditemukan.');
         }
+
+        // Ambil data kota dari mstr_kacab
+        $kota = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('kota');
+        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('namaKacab');
+        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
@@ -902,7 +1006,7 @@ class SpkController extends Controller
         return view('printSpk.pengantarNotaris', [
             'printInstallment' => [$spk],
             'noSpk' => $noSpk,
-            'kacab' => $spk->kacab,
+            'noCif' => $spk->noCif,
             'namaDebitur' => $spk->namaDebitur,
             'namaIstri' => $spk->namaIstri,
             'pekerjaanDeb' => $spk->pekerjaanDeb,
@@ -919,8 +1023,10 @@ class SpkController extends Controller
             'noRekTab' => $spk->noRekTab,
             'provisi' => $spk->provisi,
             'adm' => $spk->adm,
+            'admKredit' => $spk->admKredit,
             'fasilitasKred' => $spk->fasilitasKred,
-            'namaKacab' => $spk->namaKacab,
+            'namaKacab' => $namaKacab,
+            'kantorCabang' => $kantorCabang,
             'pengikatanJaminan' => $spk->pengikatanJaminan,
             'umur' => $umur,
             'plafondTerbilang' => $plafondTerbilang,
@@ -934,6 +1040,9 @@ class SpkController extends Controller
             'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
             'denda' => $denda,
             'dendaTerbilang' => $dendaTerbilang,
+            'jmnbpkb' => $jmnbpkb,
+            'jmnrekening' => $jmnrekening,
+            'jmnSertifikat' => $jmnSertifikat,
         ]);
     }
 

@@ -29,6 +29,10 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="moCif">NO. CIF :</label>
+                            <input type="text" class="form-control" name="moCif" required>
+                        </div>
+                        <div class="form-group">
                             <label for="noRekKred">NO. REKENENING KREDIT :</label>
                             <input type="text" class="form-control" name="noRekKred" required>
                         </div>
@@ -40,7 +44,6 @@
                             <label for="noSpk">NO. SPK :</label>
                             <input type="text" class="form-control" name="noSpk" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="namaDebitur">NAMA DEBITUR :</label>
                             <input type="text" class="form-control" name="namaDebitur" required>

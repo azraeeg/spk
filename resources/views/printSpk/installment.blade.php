@@ -29,10 +29,10 @@
 
                         <div class="col-md-12">
                             <p>
-                                <strong>1. {{$namaKacab}}</strong> dalam hal ini bertindak dalam jabatannya selaku Kepala {{$kacab}} 
+                                <strong>1. {{$namaKacab}}</strong> dalam hal ini bertindak dalam jabatannya selaku Kepala {{$kantorCabang}} 
                                 PT. Bank Perekonomian Rakyat Nusamba Cepiring, 
                                 berdasarkan Surat Kuasa Direksi dibuat dihadapan (nama notaris) Magister Kenotariatan 
-                                Notaris di (tempat notaris) tertanggal (tgl sk kacab) (no sk kacab). 
+                                Notaris di (tempat notaris) tertanggal {{$tglSkKacab}} nomor {{$noSkKacab}}. 
                                 Bertindak untuk dan atas nama serta sah mewakili 
                                 Direksi Perseroan Terbatas Bank Perekonomian Rakyat Nusamba Cepiring 
                                 yang berkantor di Jalan Raya Gondang No 30, Cepiring, Kendal, 
@@ -166,27 +166,6 @@
                          sebesar {{$denda}}% ({{$dendaTerbilang}} persen) setiap bulan dari seluruh kewajiban 
                          <strong>PEMINJAM</strong> yang tertunggak.</p>
                     </div>
-                    
-                    <!-- <div class="col-md-12">
-                        <h5><strong>JAMINAN</strong></h5>
-                        <p>Kendaraan roda: RODA 2</p>
-                        <p>Merk / Tahun: HONDA / 2024</p>
-                        <p>Type: SPM</p>
-                        <p>BPKB Nomor: J-989898989898</p>
-                        <p>Nomor Polisi: H-1234-GL</p>
-                        <p>Atas Nama: AGUS SETIAWAN</p>
-                        <p>Jaminan Milik: SENDIRI</p>
-                    </div>
-                    
-                    <div class="col-md-12">
-                        <h5><strong>REKENING TERKAIT</strong></h5>
-                        <p>Bilyet Nomor: 0</p>
-                        <p>Rekening Nomor: 12344555</p>
-                        <p>Atas Nama: AGUS SETIAWAN</p>
-                        <p>Bilyet Nomor: 9897878787</p>
-                        <p>Rekening Nomor: 7676767676</p>
-                        <p>Atas Nama: AGUS SETIAWAN</p>
-                    </div> -->
                 </div>
                 <div class="row p-3 mb-2">
                     <div class="col-md-12 text-center">
@@ -199,52 +178,54 @@
                             <strong>(1)</strong> Untuk menjamin pembayaran kembali seluruh hutang dan kewajiban <strong>PEMINJAM</strong> secara tertib berdasarkan <strong>PERJANJIAN KREDIT</strong> ini, baik hutang pokok, bunga, denda, dan kewajiban lainnya yang terhutang, <strong>PEMINJAM</strong> sepakat untuk memberikan agunan berupa:
                         </p>
                     </div>
+                    @php $counter = 0; @endphp
+                    @foreach ($jmnSertifikat as $index => $sertifikat)
                     <div class="col-md-12">
                         <p>
-                            <strong>NANTI DI FOREACH DARI TABEL AGUNAN DI DATABASE</strong>
+                            <strong>{{ chr(97 + $counter) }}. Sebidang tanah beserta segala turutannya yang berdiri di atasnya sebagaimana dengan tanda bukti hak sebagai berikut :</strong>
                         </p>
-                    </div>
-
-                    <div class="col-md-12">
-                        <p><strong>a. Sebidang tanah beserta segala turutannya yang berdiri di atasnya sebagaimana dengan tanda bukti hak sebagai berikut :</strong></p>
                         <ul>
-                            <li><strong>No. SHM/SHGB/NIB:</strong> 00886 - <strong>Tanggal:</strong> 02 Maret 2025</li>
-                            <li><strong>Surat Ukur/Gambar Situasi:</strong> 22/SU/2022 - <strong>Tanggal:</strong> 02 Maret 2025</li>
-                            <li><strong>Luas Tanah:</strong> 425 m²</li>
-                            <li><strong>Jenis Bangunan:</strong> RUMAH</li>
-                            <li><strong>Lokasi:</strong> GONDANG 001/005 CEPIRING KENDAL</li>
-                            <li><strong>Atas Nama Pemegang Hak:</strong> AGUS SETIAWAN</li>
+                            <li><strong>No. SHM/SHGB/NIB:</strong> {{ $sertifikat->shmShgbNib }} - 
+                                <strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($sertifikat->tglShmShgbNib)->translatedFormat('d F Y') }}</li>
+                            <li><strong>Surat Ukur/Gambar Situasi:</strong> {{ $sertifikat->suratUkur }} - 
+                                <strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($sertifikat->tglSuratUkur)->translatedFormat('d F Y') }}</li>
+                            <li><strong>Luas Tanah:</strong> {{ number_format($sertifikat->luasTanah, 0, ',', '.') }} m²</li>
+                            <li><strong>Jenis Bangunan:</strong> {{ $sertifikat->jenisBangunan }}</li>
+                            <li><strong>Lokasi:</strong> {{ $sertifikat->terletakDi }}</li>
+                            <li><strong>Atas Nama Pemegang Hak:</strong> {{ $sertifikat->atasNama }}</li>
                         </ul>
                     </div>
-
+                    @php $counter++; @endphp
+                    @endforeach
+                    @foreach($jmnbpkb as $index => $item)
                     <div class="col-md-12">
-                        <p><strong>b. BPKB Kendaraan Roda Empat:</strong></p>
+                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda Empat:</strong></p>
                         <ul>
-                            <li><strong>Bukti Kepemilikan Nomor:</strong> J-989898989898</li>
-                            <li><strong>Type:</strong> SPM</li>
-                            <li><strong>Nomor Rangka:</strong> 123456789</li>
-                            <li><strong>Nomor Mesin:</strong> 123456789</li>
-                            <li><strong>Bahan Bakar:</strong> BENSIN</li>
-                            <li><strong>Nomor Polisi:</strong> H-1234-GL</li>
-                            <li><strong>Merk / Tahun:</strong> HONDA / 2024</li>
-                            <li><strong>Atas Nama:</strong> AGUS SETIAWAN</li>
+                            <li><strong>Bukti Kepemilikan Nomor:</strong> {{ $item->noBpkb }}</li>
+                            <li><strong>Type:</strong> {{ $item->tipe }}</li>
+                            <li><strong>Nomor Rangka:</strong> {{ $item->noRangka }}</li>
+                            <li><strong>Nomor Mesin:</strong> {{ $item->noMesin }}</li>
+                            <li><strong>Bahan Bakar:</strong> {{ $item->bahanBakar }}</li>
+                            <li><strong>Nomor Polisi:</strong> {{ $item->noPol }}</li>
+                            <li><strong>Merk / Tahun:</strong> {{ $item->merek }} / {{ $item->tahun }}</li>
+                            <li><strong>Atas Nama:</strong> {{ $item->atasNama }}</li>
                         </ul>
                     </div>
-
+                    @php $counter++; @endphp
+                    @endforeach
+                    {{-- Jaminan Rekening --}}
+                    @foreach($jmnrekening as $item)
                     <div class="col-md-12">
-                        <p><strong>c. BPKB Kendaraan Roda Empat:</strong></p>
+                        <p><strong>{{ chr(97 + $counter) }}. Rekening / Deposito / Tabungan:</strong></p>
                         <ul>
-                            <li><strong>Bukti Kepemilikan Nomor:</strong> G-99898989</li>
-                            <li><strong>Type:</strong> MPNP</li>
-                            <li><strong>Nomor Rangka:</strong> 98989898989898</li>
-                            <li><strong>Nomor Mesin:</strong> 9989898787</li>
-                            <li><strong>Bahan Bakar:</strong> BENSIN</li>
-                            <li><strong>Nomor Polisi:</strong> H-5645-HB</li>
-                            <li><strong>Merk / Tahun:</strong> TOYOTA / YARIS</li>
-                            <li><strong>Atas Nama:</strong> AGUS SETIAWAN</li>
+                            <li><strong>No. Bilyet:</strong> {{ $item->noBilyet }}</li>
+                            <li><strong>No. Rekening:</strong> {{ $item->noRek }}</li>
+                            <li><strong>Atas Nama:</strong> {{ $item->atasNama }}</li>
+                            <li><strong>Nilai Taksasi:</strong> Rp {{ number_format($item->taksasi, 0, ',', '.') }}</li>
                         </ul>
                     </div>
-
+                    @php $counter++; @endphp
+                    @endforeach
                     <div class="col-md-12">
                         <p>
                             <strong>(2)</strong> Asli bukti kepemilikan barang-barang agunan sebagaimana disebut pada <strong>Ayat 1</strong> ini harus diserahkan dan akta-akta pengikatan agunan yang berkaitan dengan barang-barang agunan tersebut harus sudah ditandatangani <strong>PEMINJAM</strong>/pemegang hak dan <strong>BANK</strong> serta diterima oleh <strong>BANK</strong> sebelum dilakukan pencairan pinjaman.

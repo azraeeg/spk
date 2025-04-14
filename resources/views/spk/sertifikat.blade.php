@@ -41,20 +41,20 @@
                             <input type="text" class="form-control" name="luasTanah" required>
                         </div>
                         <div class="form-group">
-                            <label for="shm">NOMOR SHM :</label>
-                            <input type="text" class="form-control" name="shm" required>
+                            <label for="shmShgbNib">NOMOR SHM / SHGB / NIB :</label>
+                            <input type="text" class="form-control" name="shmShgbNib" required>
                         </div>
                         <div class="form-group">
-                            <label for="hgb">NOMOR HGB :</label>
-                            <input type="text" class="form-control" name="hgb" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="nib">NOMOR NIB :</label>
-                            <input type="text" class="form-control" name="nib" required>
+                            <label for="tglShmShgbNib">TANGGAL NOMOR SHM / SHGB / NIB :</label>
+                            <input type="date" class="form-control" name="tglShmShgbNib" required>
                         </div>
                         <div class="form-group">
                             <label for="suratUkur">SURAT UKUR / GAMBAR SITUASI :</label>
                             <input type="text" class="form-control" name="suratUkur" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tglSuratUkur">TANGGAL UKUR / GAMBAR SITUASI :</label>
+                            <input type="date" class="form-control" name="tglSuratUkur" required>
                         </div>
                         <div class="form-group">
                             <label for="jenisBangunan">JENIS BANGUNAN :</label>

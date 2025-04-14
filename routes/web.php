@@ -25,23 +25,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/formspk', [SpkController::class, 'showspk'])->name('spk.form');
     Route::post('/form', [SpkController::class, 'storeData'])->name('spk.create');
 
-    // =====================evaluasi==================
-    Route::get('/formeva', [EvaluasiController::class, 'evaread'])->name('eva.form');
-    Route::get('/formnonbedah', [EvaluasiController::class, 'formnonbedah'])->name('form.nonbedah');
-    Route::post('/nonbedah/store', [EvaluasiController::class, 'storenonbedah'])->name('nonbedah.store');
-    Route::get('/formbedah', [EvaluasiController::class, 'formbedah'])->name('form.bedah');
-    Route::post('/bedah/store', [EvaluasiController::class, 'storebedah'])->name('bedah.store');
-    // Route::get('/hasilbedah', [EvaluasiController::class, 'hasilbedah'])->name('hasil.bedah');
-
-
-    Route::get('/formhasil',[EvaluasiController::class,'formhasil'])->name('form.hasil');
-    Route::get('/hasil-penilaian/bedah/{nopeg}', [EvaluasiController::class, 'hasilbedah'])->name('hasil.bedah');
-    Route::get('/hasil-penilaian/nonbedah/{nopeg}', [EvaluasiController::class, 'hasilnonbedah'])->name('hasil.nonbedah');
-
-    Route::get('/hasil-penilaian/nonbedahuser', [EvaluasiController::class, 'hasilnonbedahuser'])->name('hasil.nonbedahuser');
-    Route::get('/hasil-penilaian/bedahuser', [EvaluasiController::class, 'hasilbedahuser'])->name('hasil.bedahuser');
-
-
 
     // ====================PROFIL==================
     Route::get('/profil',[ProfilController::class,'profil'])->name('profil.view');
@@ -55,10 +38,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/ganti-password', [ProfilController::class, 'gantiPasswordForm'])->name('profil.ganti-password.form');
     Route::post('/ganti-password', [ProfilController::class, 'gantiPassword'])->name('profil.ganti-password');
 
-    // ====================sertfikat===============
-    Route::get('/sertif', [ProfilController::class, 'sertif'])->name('profil.sertif');
-    Route::post('/sertif/upload', [ProfilController::class, 'storesertif'])->name('sertifikat.store');
-
     // ====================dashboard===============
     Route::get('/dashboard',[HomeController::class,'dashboard'])->name('dashboard');
     // ====================read spk=================
@@ -71,6 +50,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::post('/spk/jaminansertifpost', [SpkController::class, 'storeDataSertif'])->name('spk.storeDataSertif');
     Route::get('/spk/jaminanrekening', [SpkController::class, 'jaminanRekening'])->name('spk.jaminanrekening');
     Route::post('/spk/jaminanrekeningpost', [SpkController::class, 'storeDataRek'])->name('spk.storeDataRek');
+    Route::get('/spk/tanpajaminan', [SpkController::class, 'tanpaJaminan'])->name('spk.tanpaJaminan');
+    Route::post('/spk/tanpajaminanpost', [SpkController::class, 'storeDataTanpaJaminan'])->name('spk.tanpajaminan.store');
+
 
     Route::get('/spk/{noSpk}/edit', [SpkController::class, 'edit'])->name('spk.edit');
     Route::put('/spk/{noSpk}', [SpkController::class, 'update'])->name('spk.update');

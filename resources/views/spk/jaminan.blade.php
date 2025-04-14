@@ -82,7 +82,7 @@
 
                 </i>
               </div>
-              <a href="#" class="small-box-footer">Isi data jaminan <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{route ('admin.spk.tanpaJaminan')}}" class="small-box-footer">Input <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
 </div>
