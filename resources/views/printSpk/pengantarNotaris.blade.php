@@ -6,25 +6,27 @@
         <div class="card-header"></div>
         <div class="card-body">
             <div class="row p-3 mb-2">
-                <div class="col-md-12 text-center">
-                    <h3><strong>BPR NUSAMBA CEPIRING</strong></h3>
-                    <p>{{$noCif}}</p>
-                    <hr style="margin: auto; border: 1px solid black;">
-                    <h4><strong>SURAT PENGANTAR NOTARIS</strong></h4>
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4 class="mb-0"><strong>BPR NUSAMBA CEPIRING</strong></h4>
+                        <h5 class="mb-0">{{$noCif}}</h5>
+                    </div>
+                    
+                    <h5 class="text-center" style="text-decoration: underline;"><strong>SURAT PENGANTAR NOTARIS</strong></h5>
                 </div>
             </div>
+
 
             <div class="row p-3 mb-2">
                 <div class="col-md-12">
-                    <p><strong>Kepada</strong></p>
-                    <p>Yth. Notaris</p>
-                    <p>di kota KENDAL</p>
+                    <p class="mb-1">Kepada</p>
+                    <p class="mb-1">Yth. Notaris</p>
+                    <p class="mb-3">di kota KENDAL</p>
 
-                    <p>Dengan hormat,</p>
-                    <p>Bersama ini kami hadapkan nasabah:</p>
+                    <p class="mb-2">Dengan hormat,</p>
+                    <p class="mb-1">Bersama ini kami hadapkan nasabah:</p>
                 </div>
             </div>
-
             <div class="row p-3 mb-2">
                 <div class="col-md-12">
                     <table style="width: 100%; border-collapse: collapse;">
@@ -117,7 +119,6 @@
             <div class="row p-3 mb-2">
                 <div class="col-md-12">
                     <p><strong>Barang jaminan berupa:</strong></p>
-                    <!-- nanti di foreach dari db jamainan sesuai dengan noSpk -->
                      
                     @php $counter = 0; @endphp
                     @foreach ($jmnSertifikat as $index => $sertifikat)
