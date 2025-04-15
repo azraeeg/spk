@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use App\Models\FormSpk;
 use App\Models\User;
 use Riskihajar\Terbilang\Facades\Terbilang;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -610,10 +612,22 @@ class SpkController extends Controller
             $terbilang
         );
     }
-    public function printTransProduk($noSpk)
+    
+
+        //generate qrcode
+        // $lokasi = $kantorCabang ?? 'Tidak diketahui';
+        // $waktuSekarang = Carbon::now()->format('d-m-Y H:i');
+        // $namaDebitur = $data->namaDebitur;
+        // $namaIstri = $data->namaIstri;
+        // $isiQr = " $namaKacab\n $waktuSekarang\n ";
+        // $isiQr2 = "$namaDebitur\n $waktuSekarang\n";
+        // $isiQr3 = "$namaIstri\n $waktuSekarang\n";
+
+    public function printTransProduk(Request $request,$noSpk)
     {
         // Ambil semua data dari form_spk berdasarkan noSpk
         $data = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        // dd($data);
 
         // Jika data tidak ditemukan, redirect atau tampilkan error
         if (!$data) {
@@ -622,6 +636,11 @@ class SpkController extends Controller
         //ambil data dari tabel mstr_kacab
         $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('namaKacab');
         $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
+
+        if ($request->get('export')=='pdf'){
+            $pdf = Pdf::loadView('pdf.transprod', ['data' => $data]);
+            return $pdf->stream('transparansiProduk.pdf');
+        }
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($data->provisi / 100) * $data->plafondKred;
@@ -689,6 +708,11 @@ class SpkController extends Controller
             'pengikatanJaminan'        => $data->pengikatanJaminan,
             'umur'                     => $umur,
             'namaKacab'                => $namaKacab,
+            'data'                => $data,
+            
+            // 'qrData'                   => $isiQr,
+            // 'qrData2'                   => $isiQr2,
+            // 'qrData3'                   => $isiQr3,
         ]);
     }
 

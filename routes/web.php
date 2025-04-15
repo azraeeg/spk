@@ -69,6 +69,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/printSpk7/{noSpk}', [SpkController::class, 'printPengNotaris'])->name('spk.print7');
     Route::get('/printSpk8/{noSpk}', [SpkController::class, 'printAssesoir'])->name('spk.print8');
 
+    //=================pdf================
+    
+
 
 });
 

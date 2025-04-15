@@ -4,9 +4,7 @@
 <div class="col-md-12">
         <div class="card card-info">
             <div class="card-header">
-            <a href="{{ route('admin.spk.print3', ['noSpk' => $data->noSpk]) }}?export=pdf" class="btn btn-danger">
-                Cetak PDF
-            </a>
+            
             </div>
             <div class="card-body">
                 <div class="row p-3 mb-2">
