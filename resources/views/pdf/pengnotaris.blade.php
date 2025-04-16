@@ -1,22 +1,39 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pengantar-Notaris-{{ $viewData['namaDebitur'] }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 12px;
+        }
+        h2, h5 {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+        }
+        ul {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
 <div class="col-md-12">
     <div class="card card-info">
         <div class="card-header">
-            <a href="{{ route('admin.pdf.pengnotaris', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
-                Cetak PDF
-            </a>
         </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h4 class="mb-0"><strong>BPR NUSAMBA CEPIRING</strong></h4>
-                        <h5 class="mb-0">{{$noCif}}</h5>
-                    </div>
-                    
-                    <h5 class="text-center" style="text-decoration: underline;"><strong>SURAT PENGANTAR NOTARIS</strong></h5>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                        <tr>
+                            <td style="text-align: left;"><h2 class="mb-0"><strong>BPR NUSAMBA CEPIRING</strong></h2></td>
+                            <td style="text-align: right;"><h2 class="mb-0"><strong>{{$viewData['noCif']}}</strong></h2></td>
+                        </tr>
+                    </table>
+                    <h3 style="text-align: center; text-decoration: underline;"><strong>SURAT PENGANTAR NOTARIS</strong></h3>
                 </div>
             </div>
 
@@ -36,15 +53,15 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding: 5px;"><strong>Nama</strong></td>
-                            <td style="padding: 5px;">: {{$namaDebitur}}</td>
+                            <td style="padding: 5px;">: {{$viewData['namaDebitur']}}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Alamat</strong></td>
-                            <td style="padding: 5px;">: {{$alamatDeb}}</td>
+                            <td style="padding: 5px;">: {{$viewData['alamatDeb']}}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Keperluan</strong></td>
-                            <td style="padding: 5px;">: {{$pengikatanJaminan}}</td>
+                            <td style="padding: 5px;">: {{$viewData['pengikatanJaminan']}}</td>
                         </tr>
                     </table>
                 </div>
@@ -62,34 +79,34 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="padding: 5px;"><strong>Pokok</strong></td>
-                            <td style="padding: 5px;">: Rp. {{ number_format($plafondKred, 0, ',', '.') }}</td>
+                            <td style="padding: 5px;">: Rp. {{ number_format($viewData['plafondKred'], 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Bunga</strong></td>
-                            <td style="padding: 5px;">: {{$bunga}} %</td>
+                            <td style="padding: 5px;">: {{$viewData['bunga']}} %</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Administrasi</strong></td>
-                            <td style="padding: 5px;">: Rp. {{ number_format($adm, 0, ',', '.') }}</td>
+                            <td style="padding: 5px;">: Rp. {{ number_format($viewData['adm'], 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Provisi</strong></td>
-                            <td style="padding: 5px;">: {{$provisi}} %</td>
+                            <td style="padding: 5px;">: {{$viewData['provisi']}} %</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Jangka Waktu</strong></td>
-                            <td style="padding: 5px;">: {{$jangkaWaktu}} bulan</td>
+                            <td style="padding: 5px;">: {{$viewData['jangkaWaktu']}} bulan</td>
                         </tr>
                         <tr>
                             @php
                                 use Illuminate\Support\Str;
 
-                                $outputJenisKredit = $fasilitasKred;
+                                $outputJenisKredit = $viewData['fasilitasKred'];
 
-                                if (Str::contains(strtolower($fasilitasKred), 'instalment')) {
-                                    $outputJenisKredit = 'KREDIT INSTALMENT ' . trim(Str::after(strtolower($fasilitasKred), 'instalment'));
-                                } elseif (Str::contains(strtolower($fasilitasKred), 'reguler')) {
-                                    $outputJenisKredit = 'KREDIT REGULER ' . trim(Str::after(strtolower($fasilitasKred), 'reguler'));
+                                if (Str::contains(strtolower($viewData['fasilitasKred']), 'instalment')) {
+                                    $outputJenisKredit = 'KREDIT INSTALMENT ' . trim(Str::after(strtolower($viewData['fasilitasKred']), 'instalment'));
+                                } elseif (Str::contains(strtolower($viewData['fasilitasKred']), 'reguler')) {
+                                    $outputJenisKredit = 'KREDIT REGULER ' . trim(Str::after(strtolower($viewData['fasilitasKred']), 'reguler'));
                                 }
                             @endphp
                             <td style="padding: 5px;"><strong>Jenis Kredit</strong></td>
@@ -97,11 +114,11 @@
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Nilai Hak Tanggungan</strong></td>
-                            <td style="padding: 5px;">: Rp. {{ number_format($plafondKred * 1.5, 0, ',', '.') }} </td>
+                            <td style="padding: 5px;">: Rp. {{ number_format($viewData['plafondKred'] * 1.5, 0, ',', '.') }} </td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;"> 
-                                @if(stripos($fasilitasKred, 'instalment') !== false)
+                                @if(stripos($viewData['fasilitasKred'], 'instalment') !== false)
                                  Angsuran pokok dan Bunga dibayar setiap bulan
                                 @else
                                 Angsuran Bunga dibayar setiap bulan, Pokok dibayar lunas sampai jatuh tempo
@@ -110,7 +127,7 @@
                         </tr>
                         <tr>
                             <td style="padding: 5px;"><strong>Melunasi pokok</strong></td>
-                            <td style="padding: 5px;">: {{$jangkaWaktu}} bulan</td>
+                            <td style="padding: 5px;">: {{$viewData['jangkaWaktu']}} bulan</td>
                         </tr>
                         <tr>
                             <td style="padding: 5px;">Pinalty Overdue sebesar ketentuan yang berlaku pada BPR NUSAMBA CEPIRING</td>
@@ -125,7 +142,7 @@
                     <p><strong>Barang jaminan berupa:</strong></p>
                      
                     @php $counter = 0; @endphp
-                    @foreach ($jmnSertifikat as $index => $sertifikat)
+                    @foreach ($viewData['jmnSertifikat'] as $index => $sertifikat)
                     <div class="col-md-12">
                         <p>
                             <strong>{{ chr(97 + $counter) }}. Sebidang tanah beserta segala turutannya yang berdiri di atasnya sebagaimana dengan tanda bukti hak sebagai berikut :</strong>
@@ -143,9 +160,9 @@
                     </div>
                     @php $counter++; @endphp
                     @endforeach
-                    @foreach($jmnbpkb as $index => $item)
+                    @foreach($viewData['jmnbpkb'] as $index => $item)
                     <div class="col-md-12">
-                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda Empat:</strong></p>
+                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda {{$item->kendRoda}}:</strong></p>
                         <ul>
                             <li><strong>Bukti Kepemilikan Nomor:</strong> {{ $item->noBpkb }}</li>
                             <li><strong>Type:</strong> {{ $item->tipe }}</li>
@@ -160,7 +177,7 @@
                     @php $counter++; @endphp
                     @endforeach
                     {{-- Jaminan Rekening --}}
-                    @foreach($jmnrekening as $item)
+                    @foreach($viewData['jmnrekening'] as $item)
                     <div class="col-md-12">
                         <p><strong>{{ chr(97 + $counter) }}. Rekening / Deposito / Tabungan:</strong></p>
                         <ul>
@@ -186,12 +203,12 @@
                     <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                         <tr>
                             <td style="text-align: left;"><strong>Mengetahui</strong></td>
-                            <td style="text-align: right;">{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
+                            <td style="text-align: right;">{{ \Carbon\Carbon::parse($viewData['tglDroping'])->translatedFormat('d F Y') }}</td>
                         </tr>
                         <tr><td colspan="2" style="height: 80px;"></td></tr> <!-- spasi tanda tangan -->
                         <tr>
-                            <td style="text-align: left; font-weight: bold;">{{$namaKacab}}</td>
-                            <td style="text-align: right; font-weight: bold;">{{$admKredit}}</td>
+                            <td style="text-align: left; font-weight: bold;">{{$viewData['namaKacab']}}</td>
+                            <td style="text-align: right; font-weight: bold;">{{$viewData['admKredit']}}</td>
                         </tr>
                         <tr>
                             <td style="text-align: left;">KKPO</td>
@@ -200,10 +217,10 @@
                     </table>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-@endsection
+</body>
+</html>

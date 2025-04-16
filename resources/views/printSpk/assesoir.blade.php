@@ -3,7 +3,11 @@
 @section('content')
 <div class="col-md-12">
     <div class="card card-info">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <a href="{{ route('admin.pdf.assesoir1', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
+                Cetak PDF
+            </a>
+        </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
@@ -57,27 +61,28 @@
                 <div class="col-md-12 mt-3">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding: 5px; text-align: right;">{{$kota}},</td>
-                            <td style="padding: 5px;">{{$tglDroping}}</td>
+                            <td style="padding: 5px; text-align: right;">{{$kota}},{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
+                            
                         </tr>
                     </table>
                 </div>
 
                 <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                     <tr>
-                        <td style="text-align: center; padding: 10px; font-weight: bold;">Yang diberi Kuasa,</td>
-                        <td style="text-align: center; padding: 10px; font-weight: bold;">Yang Memberi Kuasa,</td>
+                        <td style="text-align: left; padding: 10px; font-weight: bold;">Yang diberi Kuasa,</td>
+                        <td style="text-align: right; padding: 10px; font-weight: bold;">Yang Memberi Kuasa,</td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="height: 50px; text-align: center;">{Materai}</td>
+                        <td style="height: 80px; text-align: right;"></td>
+                        <td style="height: 80px; text-align: center;">{Materai}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center; font-weight: bold;">{{$namaKacab}}</td>
-                        <td style="text-align: center; font-weight: bold;">{{$namaDebitur}}</td>
+                        <td style="text-align: left; font-weight: bold;">{{$namaKacab}}</td>
+                        <td style="text-align: right; font-weight: bold;">{{$namaDebitur}}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center;">Kepala Kantor Pusat Operasional</td>
-                        <td style="text-align: center;">Debitur</td>
+                        <td style="text-align: left;">Kepala Kantor Pusat Operasional</td>
+                        <td style="text-align: right;">Debitur</td>
                     </tr>
                 </table>
 
@@ -91,7 +96,11 @@
 
 <div class="col-md-12">
     <div class="card card-info">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <a href="{{ route('admin.pdf.assesoir2', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
+                Cetak PDF
+            </a>
+        </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
@@ -169,21 +178,20 @@
                 <div class="col-md-12 mt-3">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding: 5px; text-align: right;">{{$kota}},</td>
-                            <td style="padding: 5px;">{{$tglDroping}}</td>
+                            <td style="padding: 5px; text-align: left;">{{$kota}},{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
                         </tr>
                     </table>
                 </div>
 
                 <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                     <tr>
-                        <td style="text-align: center; padding: 10px; font-weight: bold;">Yang Menyatakan,</td>
+                        <td style="text-align: left; padding: 10px; font-weight: bold;">Yang Menyatakan,</td>
                     </tr>
                     <tr>
-                        <td style="height: 50px; text-align: center;">{Materai}</td>
+                        <td style="height: 80px; text-align: left;">{Materai}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center; font-weight: bold;">
+                        <td style="text-align: left; font-weight: bold;">
                             {{$namaDebitur}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$namaIstri}}
                         </td>
                     </tr>
@@ -199,7 +207,11 @@
 
 <div class="col-md-12">
     <div class="card card-info">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <a href="{{ route('admin.pdf.assesoir3', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
+                Cetak PDF
+            </a>
+        </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
@@ -278,22 +290,21 @@
                 <div class="col-md-12 mt-3">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding: 5px; text-align: right;">{{$kota}},</td>
-                            <td style="padding: 5px;">{{$tglDroping}}</td>
+                            <td style="padding: 5px; text-align: left;">{{$kota}},{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
                         </tr>
                     </table>
                 </div>
 
                 <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                     <tr>
-                        <td style="text-align: center; padding: 10px; font-weight: bold;">Yang Menyatakan Persetujuan,</td>
+                        <td style="text-align: left; padding: 10px; font-weight: bold;">Yang Menyatakan,</td>
                     </tr>
                     <tr>
-                        <td style="height: 50px; text-align: center;">{Materai}</td>
+                        <td style="height: 80px; text-align: left;">{Materai}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center; font-weight: bold;">
-                            {{$namaDebitur}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$namaIstri}}
+                        <td style="text-align: left; font-weight: bold;">
+                            {{$namaDebitur}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$namaIstri}}
                         </td>
                     </tr>
                 </table>
@@ -308,7 +319,11 @@
 
 <div class="col-md-12">
     <div class="card card-info">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <a href="{{ route('admin.pdf.assesoir4', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
+                Cetak PDF
+            </a>
+        </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
@@ -459,7 +474,7 @@
                 <div class="col-md-12 mt-3">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="width: 50%; text-align: left; padding: 5px;">{{$kota}}, {{$tglDroping}}</td>
+                            <td style="width: 50%; text-align: left; padding: 5px;">{{$kota}},{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
                             <td style="width: 50%; text-align: left; padding: 5px;"></td>
                         </tr>
                     </table>
@@ -503,7 +518,11 @@
 
 <div class="col-md-12">
     <div class="card card-info">
-        <div class="card-header"></div>
+        <div class="card-header">  
+            <a href="{{ route('admin.pdf.assesoir5', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
+                Cetak PDF
+            </a>
+        </div>
         <div class="card-body">
             <div class="row p-3 mb-2">
                 <div class="col-md-12 text-center">
@@ -554,7 +573,7 @@
 
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="width: 50%; padding: 5px;">{{$kota}}, {{$tglDroping}}</td>
+                            <td style="width: 50%; padding: 5px;">{{$kota}},{{ \Carbon\Carbon::parse($tglDroping)->translatedFormat('d F Y') }}</td>
                             <td style="width: 50%; padding: 5px; text-align: right;"></td>
                         </tr>
                     </table>

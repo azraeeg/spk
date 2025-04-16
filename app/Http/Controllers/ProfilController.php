@@ -121,7 +121,7 @@ class ProfilController extends Controller
         // Validasi password lama
         if ($user->password === $request->input('password_lama')) {
             // Update password baru
-            DB::table('perawat')
+            DB::table('choper')
                 ->where('id', $user->id)
                 ->update([
                     'password' => $request->input('password_baru'),

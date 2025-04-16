@@ -145,7 +145,7 @@
                         <div class="form-group">
                             <label for="fasilitasKred">FASILITAS KREDIT :</label>
                             <select class="form-control" name="fasilitasKred" required>
-                                <option value=""></option>
+                                <option value="">--Pilih Fasilitas Kredit--</option>
                                 <option value="Instalment modal kerja">Instalment modal kerja</option>
                                 <option value="Instalment investasi">Instalment investasi</option>
                                 <option value="Instalment Konsumsi">Instalment Konsumsi</option>
@@ -175,7 +175,7 @@
                             <input type="text" class="form-control" name="adm" required>
                         </div>
                         <div class="form-group">
-                            <label for="notaris">NOTARIS :</label>
+                            <label for="biayaNotaris">BIAYA biayaNOTARIS :</label>
                             <input type="text" class="form-control" name="notaris" required>
                         </div>
                         <div class="form-group">
@@ -205,7 +205,7 @@
                         <div class="form-group">
                             <label for="sifatKred">SIFAT KREDIT :</label>
                             <select class="form-control" name="sifatKred" required>
-                                <option value=""></option>
+                                <option value="">--Pilih Sifat Kredit--</option>
                                 <option value="Instalment modal kerja">Instalment</option>
                                 <option value="Instalment investasi">Reguler</option>
                             </select>
@@ -213,7 +213,7 @@
                         <div class="form-group">
                             <label for="jenisGuna">JENIS GUNA :</label>
                             <select class="form-control" name="jenisGuna" required>
-                                <option value=""></option>
+                                <option value="">--Pilih Jenis Guna--</option>
                                 <option value="Modal Kerja">10-Modal Kerja</option>
                                 <option value="Investasi">20-Investasi</option>
                                 <option value="Kredit Pemilikan Rumah">31-Kons: Kredit Pemilikan Rumah</option>
@@ -232,6 +232,25 @@
                         <div class="form-group">
                             <label for="pengikatanJaminan">PENGIKATAN JAMINAN :</label>
                             <input type="text" class="form-control" name="pengikatanJaminan" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="kacabHadir">PILIH KACAB :</label>
+                            <select class="form-control" name="kacabHadir" required>
+                                <option value="">-- Pilih Kacab --</option>
+                                @foreach($kacabs as $kacab)
+                                    <option value="0">Bambang Susanto</option>
+                                    <option value="1">{{ $kacab->namaKacab }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="namaNotaris">PILIH NOTARIS :</label>
+                            <select class="form-control" name="namaNotaris" required>
+                                <option value="">-- Pilih Notaris --</option>
+                                @foreach($notaris as $ntr)
+                                    <option value="{{ $ntr->namaNotaris }}">{{ $ntr->namaNotaris }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     <!-- /.card-body -->
                     </div>

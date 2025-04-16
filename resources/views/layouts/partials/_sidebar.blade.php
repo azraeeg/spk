@@ -28,7 +28,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            @can('view_hrd')
+                            @can('view_admkred')
                             <a href="{{ route('admin.spk.form') }}" class="nav-link">
                                 <i class="nav-icon fa fa-arrow-circle-up"></i>
                                 <p>UPLOAD</p>
@@ -36,10 +36,12 @@
                             @endcan
                         </li>
                         <li class="nav-item">
+                            @can('view_admkred')
                             <a href="{{ route('admin.spk.cari') }}" class="nav-link">
                                 <i class="nav-icon fa fa-list"></i>
                                 <p>cari</p>
                             </a>
+                            @endcan
                         </li>
                     </ul>
                     @endcan

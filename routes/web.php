@@ -76,6 +76,12 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/pdfPersetujuanKred/{noSpk}', [SpkController::class, 'pdfPersetKred'])->name('pdf.persetujuankred');
     Route::get('/pdfFeo/{noSpk}', [SpkController::class, 'pdfFeo'])->name('pdf.feo');
     Route::get('/pdfSrhTrm/{noSpk}', [SpkController::class, 'pdfSrhTrm'])->name('pdf.srhtrmjmn');
+    Route::get('/pdfPengNotaris/{noSpk}', [SpkController::class, 'pdfPengNotaris'])->name('pdf.pengnotaris');
+    Route::get('/pdfAsseoir1/{noSpk}', [SpkController::class, 'pdfAssesoir1'])->name('pdf.assesoir1');
+    Route::get('/pdfAsseoir2/{noSpk}', [SpkController::class, 'pdfAssesoir2'])->name('pdf.assesoir2');
+    Route::get('/pdfAsseoir3/{noSpk}', [SpkController::class, 'pdfAssesoir3'])->name('pdf.assesoir3');
+    Route::get('/pdfAsseoir4/{noSpk}', [SpkController::class, 'pdfAssesoir4'])->name('pdf.assesoir4');
+    Route::get('/pdfAsseoir5/{noSpk}', [SpkController::class, 'pdfAssesoir5'])->name('pdf.assesoir5');
 
 
 });

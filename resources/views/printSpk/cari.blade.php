@@ -28,6 +28,10 @@
                     <th>serah terima jaminan</th>
                     <th>pengantar notaris</th>
                     <th>assesoir</th>
+                    @can('view_admin')
+                    <th>Aksi</th>
+                    @endcan
+                </tr>
 
                 </tr>
             </thead>
@@ -37,26 +41,37 @@
                             <td>{{ $data->noSpk }}</td>
                             <td>{{ $data->namaDebitur }}</td>
                             <td>
-                                <a href="{{ route('admin.spk.print', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print3', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print3', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print4', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print4', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print5', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print5', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print6', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print6', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print7', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print7', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.spk.print8', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">print</a>
+                                <a href="{{ route('admin.spk.print8', ['noSpk' => $data->noSpk]) }}" class="btn btn-info">lihat</a>
+                            </td> 
+                            @can('view_admin')
+                            <td>
+                                
+                                <a href="" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('admin.spk.destroy', ['noSpk' => $data->noSpk]) }}" method="post" style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
                             </td>
+                            @endcan
 
                     </tr>
                      @endforeach

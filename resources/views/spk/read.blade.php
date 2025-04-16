@@ -27,7 +27,7 @@
                     <th>FASILITAS KRED</th>
                     <th>ANG POKOK + BUNGA</th>
                     <th>ANG BUNGA</th>
-                    @can('view_hrd')
+                    @can('view_all')
                     <th>Aksi</th>
                     @endcan
                 </tr>
@@ -62,7 +62,7 @@
                             File Not Available
                         @endif
                     </td> -->
-                    @can('view_hrd')
+                    @can('view_all')
                     <td>
                         
                         <a href="{{ route('admin.spk.edit', ['noSpk' => $data->noSpk]) }}" class="btn btn-warning">Edit</a>
