@@ -33,13 +33,13 @@
                 <div class="col-md-12">
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
-                            <td style="padding: 5px;"><strong>Nomor :</strong></td>
-                            <td style="padding: 5px;">{{ $viewData['noSpk'] }}</td>
+                            <td style="padding: 5px;"><strong>Nomor :{{ $viewData['noSpk'] }}</strong></td>
                             <td style="padding: 5px;"></td>
                             <td style="padding: 5px;"></td>
                             <td style="padding: 5px;"></td>
-                            <td style="padding: 5px; text-align: right;">Kendal,</td>
-                            <td style="padding: 5px;">{{ $viewData['tglDroping'] }}</td>
+                            <td style="padding: 5px;"></td>
+                            <td style="padding: 5px; text-align: center;">{{ $viewData['kota'] }},{{ \Carbon\Carbon::parse($viewData['tglDroping'])->translatedFormat('d F Y') }}</td>
+                            <td style="padding: 5px;"></td>
                         </tr>
                     </table>
                 </div>

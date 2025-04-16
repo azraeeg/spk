@@ -30,7 +30,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="kendRoda">KENDARAAN RODA :</label>
-                            <input type="text" class="form-control" name="kendRoda" required>
+                            <select class="form-control" name="kendRoda" required>
+                                <option value=""></option>
+                                <option value="Empat">Roda Empat</option>
+                                <option value="Dua">Roda Dua</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="merek">MEREK :</label>

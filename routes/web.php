@@ -73,6 +73,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     //=================cetak pdf================
     Route::get('/pdfTransProd/{noSpk}', [SpkController::class, 'pdfTransProd'])->name('pdf.transProd');
     Route::get('/pdfInstallment/{noSpk}', [SpkController::class, 'pdfInstallment'])->name('pdf.installment');
+    Route::get('/pdfPersetujuanKred/{noSpk}', [SpkController::class, 'pdfPersetKred'])->name('pdf.persetujuankred');
+    Route::get('/pdfFeo/{noSpk}', [SpkController::class, 'pdfFeo'])->name('pdf.feo');
+    Route::get('/pdfSrhTrm/{noSpk}', [SpkController::class, 'pdfSrhTrm'])->name('pdf.srhtrmjmn');
 
 
 });

@@ -201,7 +201,7 @@
                     @endforeach
                     @foreach($jmnbpkb as $index => $item)
                     <div class="col-md-12">
-                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda Empat:</strong></p>
+                        <p><strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda {{$item->kendRoda}}:</strong></p>
                         <ul>
                             <li><strong>Bukti Kepemilikan Nomor:</strong> {{ $item->noBpkb }}</li>
                             <li><strong>Type:</strong> {{ $item->tipe }}</li>

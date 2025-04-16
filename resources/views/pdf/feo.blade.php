@@ -1,16 +1,32 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>FEO-{{ $viewData['namaDebitur'] }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 12px;
+        }
+        h2, h5 {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+        }
+        ul {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
 <div class="col-md-12">
     <div class="card card-info">
         <div class="card-header"> 
-            <a href="{{ route('admin.pdf.feo', ['noSpk' => $noSpk]) }}?export=pdf" class="btn btn-danger">
-                Cetak PDF
-            </a>
         </div>
             <div class="card-body">
                 <div class="row p-3 mb-2">
-                    <div class="col-md-12 text-center">
+                    <div style="text-align: center; margin-bottom: 10px;">
                         <h3>BPR NUSAMBA CEPIRING</h3>
                         <hr style=" margin: auto;border: 1px solid black;">
                         <h5>
@@ -24,24 +40,25 @@
                     <table class="table table-borderless">
                         <tr>
                             <td><strong>I</strong></td>
-                            <td><strong>{{$namaKacab}}</strong></td>
+                            <td><strong>{{$viewData['namaKacab']}}</strong></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
-                                Dari dan karenanya bertindak untuk dan atas nama PT. Bank Perekonomian Rakyat Nusamba Cepiring berkedudukan di {{$kota}}. <br>
+                                Dari dan karenanya bertindak untuk dan atas nama PT. Bank Perekonomian Rakyat Nusamba Cepiring 
+                                berkedudukan di {{$viewData['kota']}}. <br>
                                 Untuk selanjutnya disebut <strong>PIHAK KESATU / KREDITUR</strong>.
                             </td>
                         </tr>
                         <tr>
                             <td><strong>II</strong></td>
-                            <td><strong>{{$namaDebitur}}</strong></td>
+                            <td><strong>{{$viewData['namaDebitur']}}</strong></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 Bertindak untuk dan atas nama diri sendiri / perorangan. <br>
-                                Bertempat tinggal di <strong>{{$alamatDeb}}</strong>. <br>
+                                Bertempat tinggal di <strong>{{$viewData['alamatDeb']}}</strong>. <br>
                                 Untuk selanjutnya disebut <strong>PIHAK KEDUA / DEBITUR</strong>.
                             </td>
                         </tr>
@@ -51,7 +68,9 @@
                     <p>
                         Menerangkan bahwa untuk lebih menjamin ketertiban pembayaran lunas seluruh kewajiban kepada 
                         PIHAK KESATU / KREDITUR berdasarkan surat akte Perjanjian Kredit, KREDITUR nomor: 
-                        <strong>{{$noSpk}}</strong> tanggal <strong>{{$tglDroping}}</strong>, berikut segala perubahan / penambahannya di kemudian hari, maka PIHAK KEDUA / DEBITUR secara fiduciaire kepada PIHAK KESATU / KREDITUR atas barang-barang yang diuraikan dalam daftar terlampir.
+                        <strong>{{$viewData['noSpk']}}</strong> tanggal <strong>{{$viewData['tglDroping']}}</strong>, 
+                        berikut segala perubahan / penambahannya di kemudian hari, maka PIHAK KEDUA / DEBITUR secara 
+                        fiduciaire kepada PIHAK KESATU / KREDITUR atas barang-barang yang diuraikan dalam daftar terlampir.
                     </p>
                 </div>
                 <div class="row p-3 mb-2">
@@ -69,20 +88,21 @@
                         pada pasal 1 di atas PIHAK KESATU / KREDITUR meminjamkan BARANG-BARANG tersebut kepada 
                         PIHAK KEDUA / DEBITUR dengan ketentuan bahwa peminjaman itu akan berakhir dengan sendirinya dalam hal :
                             <ul style="list-style-type: lower-alpha;">
-                                <li>Hutang (Atas dasar mana BARANG-BARANG tersebut diserahkan sebagai jaminannya) telah dapat ditagih kembali, atau </li>
+                                <li>Hutang (Atas dasar mana BARANG-BARANG tersebut diserahkan sebagai jaminannya) telah dapat ditagih 
+                                    kembali, atau</li>
                                 <li>Jika BARANG-BARANG tersebut diserahkan kembali oleh PIHAK KESATU / KREDITUR pada PIHAK KEDUA / 
-                                    DEBITUR karena hutang berikut kewajiban lainnya telah dilunasi. 
+                                    DEBITUR karena hutang berikut kewajiban lainnya telah dilunasi.
                                 </li>
                             </ul>
                         Terhitung sejak tanggal perjanjian ini ditanda tangani, PIHAK KEDUA / DEBITUR bukan lagi pemilik 
                         dari BARANG-BARANG tersebut melainkan sebagai peminjam saja, PIHAK KESATU / KREDITUR berhak 
                         sewaktu-waktu meminta kembali BARANG-BARANG tersebut.  Dalam hal mana PIHAK KEDUA / DEBITUR 
                         diwajibkan atas biayanya sendiri menyerahkan BARANG-BARANG tersebut kepada PIHAK KESATU / KREDITUR 
-                        dalam waktu 3 (tiga) hari setelah permintaan pertama PIHAK KESATU / KREDITUR. </p>
+                        dalam waktu 3 (tiga) hari setelah permintaan pertama PIHAK KESATU / KREDITUR.</p>
 
                         <p><strong>PASAL 3:</strong>PIHAK KEDUA / DEBITUR menyatakan telah menerima BARANG-BARANG tersebut sebagai 
                         titipan baik BARANG-BARANG yang telah ada maupun yang akan dimiliki di kemudian hari.  Untuk disimpan dan 
-                        dipergunakan dengan sebaik-baiknya sesuai dengan tujuannya. </p>
+                        dipergunakan dengan sebaik-baiknya sesuai dengan tujuannya.</p>
                         
                         <p><strong>PASAL 4:</strong> PIHAK KEDUA / DEBITUR menyatakan telah menerima BARANG-BARANG tersebut 
                         di atas dengan sebaik-baiknya dan melakukan perbaikan yang telah dianggap perlu. Semua biaya pemeliharaan, 
@@ -92,7 +112,7 @@
                         <p><strong>PASAL 5:</strong>PIHAK KEDUA / DEBITUR berkewajiban untuk setiap bulan dalam waktu 15 (lima belas) 
                         hari pada bulan berikutnya menyampaikan kepada PIHAK KESATU / KREDITUR laporan tertulis menurut cara yang 
                         ditentukan PIHAK KESATU / KREDITUR mengenai keadaan BARANG-BARANG tersebut dengan menyebutkan tempat 
-                        penyimpanannya dan nilai / harga pembelian / pembuatannya serta jumlahnya. </p>
+                        penyimpanannya dan nilai / harga pembelian / pembuatannya serta jumlahnya.</p>
 
                         <p><strong>PASAL 6:</strong> PIHAK KESATU / KREDITUR atau kuasanya berhak untuk pada setiap waktu memasuki 
                         tempat dimana BARANG-BARANG itu berada memeriksa keadaannya dan juga berhak untuk melakukan atau menyuruh 
@@ -120,7 +140,8 @@
                         <p><strong>PASAL 10:</strong> Khusus untuk BARANG-BARANG perdagangan, PIHAK KESATU / KREDITUR dengan ini 
                         memberi kuasa kepada PIHAK KEDUA / DEBITUR untuk menjual BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
                         dengan ketentuan bahwa setiap waktu nilai / harga dari BARANG-BARANG tersebut (BARANG-BARANG perdagangan) 
-                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  {{ number_format($totalJaminan, 0, ',', '.') }} (dari mana blum ketemu)  
+                        sebagaimana ditetapkan oleh PIHAK KESATU / KREDITUR sedikitnya harus mempunyai nilai harga  Rp.  
+                        {{ number_format($viewData['totalJaminan'], 0, ',', '.') }} (dari mana blum ketemu)  
                         PIHAK KESATU / KREDITUR berhak sewaktu-waktu menarik kembali kuasa tersebut.</p>
 
                         <p><strong>PASAL 11:</strong> PIHAK KEDUA / DEBITUR wajib mengasuransikan BARANG-BARANG itu terhadap kebakaran, 
@@ -171,22 +192,23 @@
                         itu dengan suatu penyerahan yang sederhana. </p>
 
                         <p><strong>PASAL 16:</strong>  Mengenai perjanjian ini dan segala akibat hukumnya kedua belah pihak memiliki 
-                        domisili umum dan tetapi di kantor Panitera Pengadilan Negeri di {{$kotaPengadilanDeb}}. </p>
+                        domisili umum dan tetapi di kantor Panitera Pengadilan Negeri di {{$viewData['kotaPengadilanDeb']}}. </p>
                     </div>
                 </div>
 
-            
-            <table class="table table-borderless text-center">
+
+            <table class="table table-borderless text-center" style="text-align: center;">
                 <tr>
                     <td><strong>PIHAK KESATU</strong> <br> BPR NUSAMBA CEPIRING</td>
                     <td><strong>PIHAK KEDUA</strong> <br> DEBITUR</td>
                 </tr>
                 <tr>
-                    <td><br><br><br><strong>{{$namaKacab}}</strong></td>
-                    <td><br><br><br><strong>{{$namaDebitur}}</strong></td>
+                    <td><br><br><br><strong>{{$viewData['namaKacab']}}</strong></td>
+                    <td><br><br><br><strong>{{ $viewData['namaDebitur'] }}</strong></td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
-@endsection
+</body>
+</html>

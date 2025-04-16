@@ -269,7 +269,7 @@
           </ul>
         </div> @php $counter++; @endphp @endforeach @foreach($viewData['jmnbpkb'] as $index => $item) <div class="col-md-12">
           <p>
-            <strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda Empat:</strong>
+            <strong>{{ chr(97 + $counter) }}. BPKB Kendaraan Roda {{$item->kendRoda}}:</strong>
           </p>
           <ul>
             <li>
