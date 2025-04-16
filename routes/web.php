@@ -57,6 +57,7 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/spk/{noSpk}/edit', [SpkController::class, 'edit'])->name('spk.edit');
     Route::put('/spk/{noSpk}', [SpkController::class, 'update'])->name('spk.update');
     Route::delete('/spk/{noSpk}', [SpkController::class, 'destroy'])->name('spk.destroy');
+
     // ====================print spk================
     
     Route::get('/printSpk1', [SpkController::class, 'installment'])->name('spk.installment');
@@ -69,8 +70,9 @@ Route::group(['prefix' => 'admin','middleware' => ['auth'], 'as' => 'admin.'] , 
     Route::get('/printSpk7/{noSpk}', [SpkController::class, 'printPengNotaris'])->name('spk.print7');
     Route::get('/printSpk8/{noSpk}', [SpkController::class, 'printAssesoir'])->name('spk.print8');
 
-    //=================pdf================
-    
+    //=================cetak pdf================
+    Route::get('/pdfTransProd/{noSpk}', [SpkController::class, 'pdfTransProd'])->name('pdf.transProd');
+    Route::get('/pdfInstallment/{noSpk}', [SpkController::class, 'pdfInstallment'])->name('pdf.installment');
 
 
 });

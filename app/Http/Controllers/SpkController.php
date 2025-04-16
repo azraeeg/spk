@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use App\Models\FormSpk;
 use App\Models\User;
 use Riskihajar\Terbilang\Facades\Terbilang;
-use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 
@@ -479,92 +479,7 @@ class SpkController extends Controller
 
         return view('printSpk.cari', compact('nasabahData', 'search'));
     }
-
-    public function printInstallment($noSpk)
-    {
-        // Ambil semua data SPK dalam satu query
-        $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
-        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $noSpk)->get();
-        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $noSpk)->get();
-        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $noSpk)->get();
-
-        if (!$spk) {
-            abort(404, 'Data SPK tidak ditemukan.');
-        }
-
-        //ambil data dari tabel mstr_kacab
-        $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('namaKacab');
-        $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('kantorCabang');
-        $tglSkKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('tglSkKacab');
-        $noSkKacab = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->value('noSkKacab');
-
-        // Hitung nilai provisi dalam rupiah
-        $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
-
-        // Hitung cicilan bulanan
-        $cicilanBulanan = 0;
-        if ($spk->jangkaWaktu > 0) {
-            $cicilanBulanan = ($spk->plafondKred / $spk->jangkaWaktu) + (($spk->plafondKred * $spk->bunga) / 100 / 12);
-        }
-
-        // Hitung denda
-        $denda = $spk->bunga > 0 ? $spk->bunga / 12 : 0;
-
-        // Hitung umur debitur
-        $umur = $spk->tahunLahirDeb ? Carbon::parse($spk->tahunLahirDeb)->diffInYears(now()) : null;
-
-        // Konversi ke teks
-        $plafondTerbilang = $this->konversiTerbilang($spk->plafondKred);
-        $jangkaWaktuTerbilang = $this->konversiTerbilang($spk->jangkaWaktu);
-        $bungaTerbilang = $this->konversiTerbilang($spk->bunga);
-        $provisiTerbilang = $this->konversiTerbilang($spk->provisi);
-        $nilaiProvisiTerbilang = $this->konversiTerbilang($nilaiProvisi);
-        $admTerbilang = $this->konversiTerbilang($spk->adm);
-        $cicilanBulananTerbilang = $this->konversiTerbilang($cicilanBulanan);
-        $dendaTerbilang = $this->konversiTerbilang($denda);
-
-        return view('printSpk.installment', [
-            'printInstallment' => [$spk],
-            'noSpk' => $noSpk,
-            'namaDebitur' => $spk->namaDebitur,
-            'namaIstri' => $spk->namaIstri,
-            'pekerjaanDeb' => $spk->pekerjaanDeb,
-            'alamatDeb' => $spk->alamatDeb,
-            'noKtpDeb' => $spk->noKtpDeb,
-            'noKtpIstri' => $spk->noKtpIstri,
-            'tglPermohonan' => $spk->tglPermohonan,
-            'tglPersetujuan' => $spk->tglPersetujuan,
-            'plafondKred' => $spk->plafondKred,
-            'jangkaWaktu' => $spk->jangkaWaktu,
-            'tglDroping' => $spk->tglDroping,
-            'tglJatuhTempo' => $spk->tglJatuhTempo,
-            'bunga' => $spk->bunga,
-            'adm' => $spk->adm,
-            'noRekTab' => $spk->noRekTab,
-            'provisi' => $spk->provisi,
-            'pengikatanJaminan' => $spk->pengikatanJaminan,
-            'umur' => $umur,
-            'namaKacab' => $namaKacab,
-            'kantorCabang' => $kantorCabang,
-            'tglSkKacab' => $tglSkKacab,
-            'noSkKacab' => $noSkKacab,
-            'plafondTerbilang' => $plafondTerbilang,
-            'jangkaWaktuTerbilang' => $jangkaWaktuTerbilang,
-            'bungaTerbilang' => $bungaTerbilang,
-            'provisiTerbilang' => $provisiTerbilang,
-            'nilaiProvisi' => $nilaiProvisi,
-            'nilaiProvisiTerbilang' => $nilaiProvisiTerbilang,
-            'admTerbilang' => $admTerbilang,
-            'cicilanBulanan' => $cicilanBulanan,
-            'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
-            'denda' => $denda,
-            'dendaTerbilang' => $dendaTerbilang,
-            'jmnSertifikat' => $jmnSertifikat,
-            'jmnbpkb' => $jmnbpkb,
-            'jmnrekening' => $jmnrekening,
-        ]);
-    }
-
+    
     /**
      * Fungsi untuk mengubah angka menjadi teks dengan format bahasa Indonesia yang benar.
      */
@@ -612,35 +527,118 @@ class SpkController extends Controller
             $terbilang
         );
     }
-    
 
-        //generate qrcode
-        // $lokasi = $kantorCabang ?? 'Tidak diketahui';
-        // $waktuSekarang = Carbon::now()->format('d-m-Y H:i');
-        // $namaDebitur = $data->namaDebitur;
-        // $namaIstri = $data->namaIstri;
-        // $isiQr = " $namaKacab\n $waktuSekarang\n ";
-        // $isiQr2 = "$namaDebitur\n $waktuSekarang\n";
-        // $isiQr3 = "$namaIstri\n $waktuSekarang\n";
-
-    public function printTransProduk(Request $request,$noSpk)
+    private function getDataInstallment($spk)
     {
-        // Ambil semua data dari form_spk berdasarkan noSpk
-        $data = DB::table('form_spk')->where('noSpk', $noSpk)->first();
-        // dd($data);
-
-        // Jika data tidak ditemukan, redirect atau tampilkan error
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        if (!$spk) {
+            abort(404, 'Data SPK tidak ditemukan.');
         }
+
+        // Ambil data jaminan
+        $jmnSertifikat = DB::table('jmnsertifikat')->where('noSpk', $spk->noSpk)->get();
+        $jmnbpkb = DB::table('jmnbpkb')->where('noSpk', $spk->noSpk)->get();
+        $jmnrekening = DB::table('jmnrekening')->where('noSpk', $spk->noSpk)->get();
+
+        // Ambil data cabang
+        $cabang = DB::table('mstr_kacab')->where('kd_cabang', $spk->kd_cabang ?? '')->first();
+        $namaKacab = $cabang->namaKacab ?? null;
+        $kantorCabang = $cabang->kantorCabang ?? null;
+        $tglSkKacab = $cabang->tglSkKacab ?? null;
+        $noSkKacab = $cabang->noSkKacab ?? null;
+
+        // Hitung nilai
+        $nilaiProvisi = ($spk->provisi / 100) * $spk->plafondKred;
+        $cicilanBulanan = $spk->jangkaWaktu > 0 
+            ? ($spk->plafondKred / $spk->jangkaWaktu) + (($spk->plafondKred * $spk->bunga) / 100 / 12)
+            : 0;
+        $denda = $spk->bunga > 0 ? $spk->bunga / 12 : 0;
+        $umur = $spk->tahunLahirDeb ? Carbon::parse($spk->tahunLahirDeb)->diffInYears(now()) : null;
+
+        // Terbilang
+        $plafondTerbilang = $this->konversiTerbilang($spk->plafondKred);
+        $jangkaWaktuTerbilang = $this->konversiTerbilang($spk->jangkaWaktu);
+        $bungaTerbilang = $this->konversiTerbilang($spk->bunga);
+        $provisiTerbilang = $this->konversiTerbilang($spk->provisi);
+        $nilaiProvisiTerbilang = $this->konversiTerbilang($nilaiProvisi);
+        $admTerbilang = $this->konversiTerbilang($spk->adm);
+        $cicilanBulananTerbilang = $this->konversiTerbilang($cicilanBulanan);
+        $dendaTerbilang = $this->konversiTerbilang($denda);
+
+        return [
+            'printInstallment' => [$spk],
+            'noSpk' => $spk->noSpk,
+            'namaDebitur' => $spk->namaDebitur,
+            'namaIstri' => $spk->namaIstri,
+            'pekerjaanDeb' => $spk->pekerjaanDeb,
+            'alamatDeb' => $spk->alamatDeb,
+            'noKtpDeb' => $spk->noKtpDeb,
+            'noKtpIstri' => $spk->noKtpIstri,
+            'tglPermohonan' => $spk->tglPermohonan,
+            'tglPersetujuan' => $spk->tglPersetujuan,
+            'plafondKred' => $spk->plafondKred,
+            'jangkaWaktu' => $spk->jangkaWaktu,
+            'tglDroping' => $spk->tglDroping,
+            'tglJatuhTempo' => $spk->tglJatuhTempo,
+            'bunga' => $spk->bunga,
+            'adm' => $spk->adm,
+            'noRekTab' => $spk->noRekTab,
+            'provisi' => $spk->provisi,
+            'pengikatanJaminan' => $spk->pengikatanJaminan,
+            'umur' => $umur,
+            'namaKacab' => $namaKacab,
+            'kantorCabang' => $kantorCabang,
+            'tglSkKacab' => $tglSkKacab,
+            'noSkKacab' => $noSkKacab,
+            'plafondTerbilang' => $plafondTerbilang,
+            'jangkaWaktuTerbilang' => $jangkaWaktuTerbilang,
+            'bungaTerbilang' => $bungaTerbilang,
+            'provisiTerbilang' => $provisiTerbilang,
+            'nilaiProvisi' => $nilaiProvisi,
+            'nilaiProvisiTerbilang' => $nilaiProvisiTerbilang,
+            'admTerbilang' => $admTerbilang,
+            'cicilanBulanan' => $cicilanBulanan,
+            'cicilanBulananTerbilang' => $cicilanBulananTerbilang,
+            'denda' => $denda,
+            'dendaTerbilang' => $dendaTerbilang,
+            'jmnSertifikat' => $jmnSertifikat,
+            'jmnbpkb' => $jmnbpkb,
+            'jmnrekening' => $jmnrekening,
+        ];
+    }
+
+    public function printInstallment($noSpk)
+    {
+        $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        $viewData = $this->getDataInstallment($spk);
+        return view('printSpk.installment', $viewData);
+    }
+    public function pdfInstallment($noSpk)
+    {
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10,
+            'default_font' => 'dejavusans'
+        ]);
+        $spk = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+
+        $viewData = $this->getDataInstallment($spk);
+
+        $mpdf->WriteHTML(view('pdf.installment', ['viewData'=>$viewData]));
+        $mpdf->Output();
+    }
+
+
+    
+    private function getDataTransparansiProduk($data)
+    {
+        
         //ambil data dari tabel mstr_kacab
         $namaKacab = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('namaKacab');
         $kantorCabang = DB::table('mstr_kacab')->where('kd_cabang', $data->kd_cabang ?? '')->value('kantorCabang');
-
-        if ($request->get('export')=='pdf'){
-            $pdf = Pdf::loadView('pdf.transprod', ['data' => $data]);
-            return $pdf->stream('transparansiProduk.pdf');
-        }
 
         // Hitung nilai provisi dalam rupiah
         $nilaiProvisi = ($data->provisi / 100) * $data->plafondKred;
@@ -669,8 +667,8 @@ class SpkController extends Controller
         $admTerbilang = $this->konversiTerbilang($data->adm);
         $cicilanBulananTerbilang = $this->konversiTerbilang($cicilanBulanan);
         $dendaTerbilang = $this->konversiTerbilang($denda);
-
-        return view('printSpk.transparansiProduk', [
+    
+        return [
             'printInstallment'          => [$data],
             'noSpk'                     => $data->noSpk,
             'namaDebitur'              => $data->namaDebitur,
@@ -708,12 +706,35 @@ class SpkController extends Controller
             'pengikatanJaminan'        => $data->pengikatanJaminan,
             'umur'                     => $umur,
             'namaKacab'                => $namaKacab,
-            'data'                => $data,
-            
-            // 'qrData'                   => $isiQr,
-            // 'qrData2'                   => $isiQr2,
-            // 'qrData3'                   => $isiQr3,
+        ];
+    }
+    public function printTransProduk(Request $request, $noSpk)
+    {
+        $data = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        if (!$data) return redirect()->back()->with('error', 'Data tidak ditemukan.');
+    
+        $viewData = $this->getDataTransparansiProduk($data);
+    
+        return view('printSpk.transparansiProduk', $viewData);
+    }
+    public function pdfTransProd($noSpk)
+    {
+        $mpdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 10,
+            'margin_bottom' => 10,
+            'default_font' => 'dejavusans'
         ]);
+        $data = DB::table('form_spk')->where('noSpk', $noSpk)->first();
+        if (!$data) abort(404, 'Data tidak ditemukan.');
+
+        $viewData = $this->getDataTransparansiProduk($data);
+
+        $mpdf->WriteHTML(view('pdf.transprod', ['viewData'=>$viewData]));
+        $mpdf->Output();
     }
 
     public function printPersetujuanKred($noSpk)
