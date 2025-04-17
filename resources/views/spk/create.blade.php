@@ -29,8 +29,8 @@
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="moCif">NO. CIF :</label>
-                            <input type="text" class="form-control" name="moCif" required>
+                            <label for="noCif">NO. CIF :</label>
+                            <input type="text" class="form-control" name="noCif" required>
                         </div>
                         <div class="form-group">
                             <label for="noRekKred">NO. REKENENING KREDIT :</label>
@@ -140,7 +140,11 @@
                         </div>
                         <div class="form-group">
                             <label for="plafondKred">PLAFOND KREDIT :</label>
-                            <input type="text" class="form-control" name="plafondKred" required>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="plafondKred" id="plafondKred" required>
+                                <input type="hidden" name="plafondKred_raw" id="plafondKred_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="fasilitasKred">FASILITAS KREDIT :</label>
@@ -160,47 +164,93 @@
                         </div>
                         <div class="form-group">
                             <label for="bunga">BUNGA :</label>
-                            <input type="text" class="form-control" name="bunga" required>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="bunga" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="provisi">PROVISI :</label>
-                            <input type="text" class="form-control" name="provisi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="materai">MATERAI :</label>
-                            <input type="text" class="form-control" name="materai" required>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="provisi" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="adm">ADMINISTRASI :</label>
-                            <input type="text" class="form-control" name="adm" required>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="adm" id="adm" required>
+                                <input type="hidden" name="adm_raw" id="adm_raw">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="biayaNotaris">BIAYA biayaNOTARIS :</label>
-                            <input type="text" class="form-control" name="notaris" required>
+                            <label for="materai">MATERAI :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="materai" id="materai" required>
+                                <input type="hidden" name="materai_raw" id="materai_raw">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="biayaNotaris">BIAYA NOTARIS :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="biayaNotaris" id="biayaNotaris" required>
+                                <input type="hidden" name="biayaNotaris_raw" id="biayaNotaris_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="asuransiJiwa">ASURANSI JIWA :</label>
-                            <input type="text" class="form-control" name="asuransiJiwa" required>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="asuransiJiwa" id="asuransiJiwa" required>
+                                <input type="hidden" name="asuransiJiwa_raw" id="asuransiJiwa_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="asuransiJaminan">ASURANSI JAMINAN :</label>
-                            <input type="text" class="form-control" name="asuransiJaminan" required>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="asuransiJaminan" id="asuransiJaminan" required>
+                                <input type="hidden" name="asuransiJaminan_raw" id="asuransiJaminan_raw">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="provisi2">PROVISI (paling bawah form spk):</label>
-                            <input type="text" class="form-control" name="provisi2" required placeholder="Bila jumlah lebih atau = 1 juta ditulis =w1, kalau kurang dari 1 juta ditulis =x1">
+                            <label for="provisi2">PROVISI :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="provisi2" id="provisi2" required>
+                                <input type="hidden" name="provisi2_raw" id="provisi2_raw">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="angPokBung">ANGSURAN POKOK + BUNGA:</label>
-                            <input type="text" class="form-control" name="angPokBung" required placeholder="Bila jumlah lebih atau = 1 juta ditulis =w2, kalau kurang dari 1 juta ditulis =x2">
+                            <label for="angPokBung">ANGSURAN POKOK + BUNGA :</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="angPokBung" id="angPokBung" required>
+                                <input type="hidden" name="angPokBung_raw" id="angPokBung_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="angBung">ANGSURAN BUNGA :</label>
-                            <input type="text" class="form-control" name="angBung" required placeholder="Bila jumlah lebih atau = 1 juta ditulis =w3, kalau kurang dari 1 juta ditulis =x3">
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="angBung" id="angBung" required>
+                                <input type="hidden" name="angBung_raw" id="angBung_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="totBiaya">TOTAL BIAYA :</label>
-                            <input type="text" class="form-control" name="totBiaya" required placeholder="Bila jumlah lebih atau = 1 juta ditulis =w4, kalau kurang dari 1 juta ditulis =x4">
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="text" class="form-control" name="totBiaya" id="totBiaya" required>
+                                <input type="hidden" name="totBiaya_raw" id="totBiaya_raw">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="sifatKred">SIFAT KREDIT :</label>
@@ -261,4 +311,27 @@
                 </form>
             </div>
 </div>
+<script>
+    function formatAngka(inputId, hiddenId) {
+        const input = document.getElementById(inputId);
+        const hidden = document.getElementById(hiddenId);
+
+        input.addEventListener('input', function () {
+            let raw = this.value.replace(/\D/g, '');
+            this.value = new Intl.NumberFormat('id-ID').format(raw);
+            hidden.value = raw;
+        });
+    }
+
+    formatAngka('plafondKred', 'plafondKred_raw');
+    formatAngka('adm', 'adm_raw');
+    formatAngka('materai', 'materai_raw');
+    formatAngka('biayaNotaris', 'biayaNotaris_raw');
+    formatAngka('asuransiJiwa', 'asuransiJiwa_raw');
+    formatAngka('asuransiJaminan', 'asuransiJaminan_raw');
+    formatAngka('provisi2', 'provisi2_raw');
+    formatAngka('angPokBung', 'angPokBung_raw');
+    formatAngka('angBung', 'angBung_raw');
+    formatAngka('totBiaya', 'totBiaya_raw');    
+</script>
 @endsection
