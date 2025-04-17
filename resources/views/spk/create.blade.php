@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group">
                             <label for="noKtpDeb">NO. KTP :</label>
-                            <input type="text" class="form-control" name="noKtpDeb" required>
+                            <input type="number" class="form-control" name="noKtpDeb" required>
                         </div>
                         <div class="form-group">
                             <label for="namaIstri">NAMA ISTRI DEBITUR :</label>
@@ -98,32 +98,32 @@
                         </div>
                         <div class="form-group">
                             <label for="noKtpIstri">NO. KTP ISTRI:</label>
-                            <input type="text" class="form-control" name="noKtpIstri" required>
+                            <input type="number" class="form-control" name="noKtpIstri" required>
                         </div>
-
                         <div class="form-group">
                             <label for="namaPenj">NAMA PENJAMIN :</label>
-                            <input type="text" class="form-control" name="namaPenj" required>
+                            <input type="text" class="form-control" name="namaPenj" placeholder="Jika tidak ada diisi -" required>
                         </div>
                         <div class="form-group">
-                            <label for="tahunLahirPenj">TAHUN LAHIR :</label>
-                            <input type="date" class="form-control" name="tahunLahirPenj" required>
+                            <label for="tahunLahirPenj">TAHUN LAHIR PENJAMIN:</label>
+                            <input type="date" class="form-control" name="tahunLahirPenj" value="{{ old('tahunLahirPenj') }}" required>
+                            <small class="form-text text-muted">*Jika tidak ada di-set hari ini</small>
                         </div>
                         <div class="form-group">
-                            <label for="pekerjaanPenj">PEKERJAAN :</label>
-                            <input type="text" class="form-control" name="pekerjaanPenj" required>
+                            <label for="pekerjaanPenj">PEKERJAAN PENJAMIN:</label>
+                            <input type="text" class="form-control" name="pekerjaanPenj" placeholder="Jika tidak ada diisi -" required>
                         </div>
                         <div class="form-group">
-                            <label for="alamatPenj">ALAMAT :</label>
-                            <input type="text" class="form-control" name="alamatPenj" required>
+                            <label for="alamatPenj">ALAMAT PENJAMIN:</label>
+                            <input type="text" class="form-control" name="alamatPenj" placeholder="Jika tidak ada diisi -" required>
                         </div>
                         <div class="form-group">
                             <label for="noKtpPenj">NO. KTP PENJAMIN :</label>
-                            <input type="text" class="form-control" name="noKtpPenj" required>
+                            <input type="number" class="form-control" name="noKtpPenj" placeholder="Jika tidak ada diisi -" required>
                         </div>
                         <div class="form-group">
-                            <label for="hubunganKel">HUBUNGAN KELUARGA :</label>
-                            <input type="text" class="form-control" name="hubunganKel" required>
+                            <label for="hubunganKel">HUBUNGAN KELUARGA PENJAMIN:</label>
+                            <input type="text" class="form-control" name="hubunganKel" placeholder="Jika tidak ada diisi -" required>
                         </div>
                         
                         <div class="form-group">
@@ -165,7 +165,7 @@
                         <div class="form-group">
                             <label for="bunga">BUNGA :</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="bunga" required>
+                                <input type="number" class="form-control" name="bunga" step="any" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text">%</span>
                                 </div>
@@ -174,7 +174,7 @@
                         <div class="form-group">
                             <label for="provisi">PROVISI :</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="provisi" required>
+                                <input type="number" class="form-control" name="provisi" step="any" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text">%</span>
                                 </div>
@@ -224,7 +224,8 @@
                             <label for="provisi2">PROVISI :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="provisi2" id="provisi2" required>
+                                <input type="text" class="form-control" name="provisi2" id="provisi2" required
+                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w1, kalau kurang dari 1 juta ditulis =x1">
                                 <input type="hidden" name="provisi2_raw" id="provisi2_raw">
                             </div>
                         </div>
@@ -232,7 +233,8 @@
                             <label for="angPokBung">ANGSURAN POKOK + BUNGA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="angPokBung" id="angPokBung" required>
+                                <input type="text" class="form-control" name="angPokBung" id="angPokBung" required
+                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w2, kalau kurang dari 1 juta ditulis =x2">
                                 <input type="hidden" name="angPokBung_raw" id="angPokBung_raw">
                             </div>
                         </div>
@@ -240,7 +242,8 @@
                             <label for="angBung">ANGSURAN BUNGA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="angBung" id="angBung" required>
+                                <input type="text" class="form-control" name="angBung" id="angBung" required
+                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w3, kalau kurang dari 1 juta ditulis =x3">
                                 <input type="hidden" name="angBung_raw" id="angBung_raw">
                             </div>
                         </div>
@@ -248,7 +251,8 @@
                             <label for="totBiaya">TOTAL BIAYA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="totBiaya" id="totBiaya" required>
+                                <input type="text" class="form-control" name="totBiaya" id="totBiaya" required
+                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w4, kalau kurang dari 1 juta ditulis =x4">
                                 <input type="hidden" name="totBiaya_raw" id="totBiaya_raw">
                             </div>
                         </div>

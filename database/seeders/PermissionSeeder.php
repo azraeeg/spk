@@ -76,7 +76,8 @@ class PermissionSeeder extends Seeder
 
 
         // ====================================
-        $admkredUsers = User::whereIn('id', [232])->get();
+        $admkredUsers = User::whereIn('id', [232,234, 235, 236, 237, 238, 239, 240, 241, 242, 243,
+        244, 245, 246, 247, 248, 249, 250, 251, 252, 253,254, 255, 256])->get();
         foreach ($admkredUsers as $admkredUser) {
             $admkredUser->assignRole('admkred');
         }
