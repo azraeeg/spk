@@ -284,11 +284,11 @@
                             <input type="text" class="form-control" name="pengikatanJaminan" required>
                         </div>
                         <div class="form-group">
-                            <label for="kacabHadir">PILIH KACAB :</label>
+                            <label for="kacabHadir">PILIH PENANDATANGAN :</label>
                             <select class="form-control" name="kacabHadir" required>
                                 <option value="">-- Pilih Kacab --</option>
                                 @foreach($kacabs as $kacab)
-                                    <option value="0">Bambang Susanto</option>
+                                    <option value="0">Bambang Susanto, S.E., M.M.</option>
                                     <option value="1">{{ $kacab->namaKacab }}</option>
                                 @endforeach
                             </select>
