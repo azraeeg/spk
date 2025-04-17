@@ -1,6 +1,6 @@
 @extends('layouts.app')  
 @section('content') 
 
-ini dashboard
+dashboardnya masih kosong coy
 
 @endsection

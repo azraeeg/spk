@@ -22,8 +22,6 @@ class SpkController extends Controller
     // ===================create spk======================
     public function showspk()
     {
-        
-
         $kdCabang = Auth::user()->kd_cabang;
 
         // Ambil kacab

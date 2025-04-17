@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="" class="brand-link">
+    <a href="{{ route('admin.dashboard') }}" class="brand-link">
         <img src="{{ asset('assets/dist/img/supernusa.png') }}" alt="nusamba Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light"><small>NUSAMBA</small></span>
     </a>
@@ -14,7 +14,7 @@
                     @can('view_profil')
                     <a href="{{ route('admin.profil.view') }}" class="nav-link">
                         <i class="nav-icon fa fa-user-circle"></i>
-                        <p> Profil </p>
+                        <p> {{ Auth::user()->Nama }} </p>
                     </a>
                     @endcan
                 </li>
