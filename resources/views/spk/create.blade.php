@@ -224,38 +224,38 @@
                             <label for="provisi2">PROVISI :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="provisi2" id="provisi2" required
-                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w1, kalau kurang dari 1 juta ditulis =x1">
+                                <input type="text" class="form-control" name="provisi2" id="provisi2" required>
                                 <input type="hidden" name="provisi2_raw" id="provisi2_raw">
                             </div>
                         </div>
+                        <!-- placeholder="Bila jumlah lebih atau = 1 juta ditulis =w1, kalau kurang dari 1 juta ditulis =x1" -->
                         <div class="form-group">
                             <label for="angPokBung">ANGSURAN POKOK + BUNGA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="angPokBung" id="angPokBung" required
-                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w2, kalau kurang dari 1 juta ditulis =x2">
+                                <input type="text" class="form-control" name="angPokBung" id="angPokBung" required>
                                 <input type="hidden" name="angPokBung_raw" id="angPokBung_raw">
                             </div>
                         </div>
+                        <!-- placeholder="Bila jumlah lebih atau = 1 juta ditulis =w2, kalau kurang dari 1 juta ditulis =x2" -->
                         <div class="form-group">
                             <label for="angBung">ANGSURAN BUNGA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="angBung" id="angBung" required
-                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w3, kalau kurang dari 1 juta ditulis =x3">
+                                <input type="text" class="form-control" name="angBung" id="angBung" required>
                                 <input type="hidden" name="angBung_raw" id="angBung_raw">
                             </div>
                         </div>
+                        <!-- placeholder="Bila jumlah lebih atau = 1 juta ditulis =w3, kalau kurang dari 1 juta ditulis =x3" -->
                         <div class="form-group">
                             <label for="totBiaya">TOTAL BIAYA :</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="text" class="form-control" name="totBiaya" id="totBiaya" required
-                                    placeholder="Bila jumlah lebih atau = 1 juta ditulis =w4, kalau kurang dari 1 juta ditulis =x4">
+                                <input type="text" class="form-control" name="totBiaya" id="totBiaya" required>
                                 <input type="hidden" name="totBiaya_raw" id="totBiaya_raw">
                             </div>
                         </div>
+                        <!-- placeholder="Bila jumlah lebih atau = 1 juta ditulis =w4, kalau kurang dari 1 juta ditulis =x4" -->
                         <div class="form-group">
                             <label for="sifatKred">SIFAT KREDIT :</label>
                             <select class="form-control" name="sifatKred" required>
